@@ -38,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation("com.googlecode.json-simple:json-simple:1.1.1")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
     implementation("com.google.android.libraries.places:places:3.3.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

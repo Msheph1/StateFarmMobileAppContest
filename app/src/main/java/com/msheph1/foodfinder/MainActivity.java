@@ -1,26 +1,24 @@
 package com.msheph1.foodfinder;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-
-
-import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     PlacesClient placesClient;
-    String apiKey;
+ String apiKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        Places.initializeWithNewPlacesApiEnabled(getApplicationContext(), apiKey);
-        placesClient = Places.createClient(this);
+
         Log.i("MainActivity","Before calling");
         new Thread(new Runnable() {
             @Override
             public void run() {
-                getNearbyRes();
+                //Log.i("MainActivity",getNearbyRes());
+                parseRes();
             }
         }).start();
 
@@ -62,48 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-/*
-    private void getNearbyRes()
+
+    private String getNearbyRes()
     {
-        try {
-            Log.i("MainActivity","testing output in the method");
-            URL url = new URL("https://places.googleapis.com/v1/places:searchNearby");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("X-Goog-Api-Key", apiKey);
-            connection.setRequestProperty("X-Goog-FieldMask", "places.displayName");
-            connection.setDoOutput(true);
-            String jsonPayload = "{\"includedTypes\": [\"restaurant\"], \"maxResultCount\": 10, \"locationRestriction\": {\"circle\": {\"center\": {\"latitude\": 37.7937, \"longitude\": -122.3965}, \"radius\": 500.0}}}";
-            Log.i("MainActivity","connection attempt");
-            try(OutputStream outputStream = connection.getOutputStream())
-            {
-                byte[] input = jsonPayload.getBytes("utf-8");
-                outputStream.write(input,0,input.length);
-            }
-
-            try(BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream())))
-            {
-                StringBuilder response = new StringBuilder();
-                String line;
-                while((line = reader.readLine()) != null)
-                {
-                    response.append(line);
-                }
-                Log.i("MainActivity","printing the whole thing\n" + response.toString());
-            }
-
-            connection.disconnect();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
- */
-
-    private void getNearbyRes()
-    {
+        //https://developers.google.com/maps/documentation/places/web-service/search-nearby#json
         try {
             String baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
             String keyword = "cruise";
@@ -121,27 +81,55 @@ public class MainActivity extends AppCompatActivity {
             URL url = new URL(baseUrl + "?" + urlParameters);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
-
-
-
+            //trying buffer method
+            int bufferSize = 8192;
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder response = new StringBuilder();
-            String line;
-            while((line = reader.readLine()) != null)
+            char[] buffer = new char[bufferSize];
+            int bytesRead;
+            while((bytesRead = reader.read(buffer)) != -1)
             {
-                response.append(line);
+                response.append(buffer, 0, bytesRead);
             }
             reader.close();
-            Log.i("MainActivity","printing the whole thing\n" + response.toString());
-
-
             connection.disconnect();
+            Log.i("MainActivity", "printing the whole thing\n" + response.toString());
+            return response.toString();
+
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
+        //parse results get
+        //name , price, ratings, photos, distance
+        //for filters for the api price level cusine type distance ratings open now
+        //for filters we have max price/ min price - open now value type-restuarant/food /maybe takeout filter
+        return "err";
     }
+
+    private ArrayList<ArrayList<String>> parseRes()
+    {
+        ArrayList<ArrayList<String>> res = new ArrayList<>();
+        //String unparsed = getNearbyRes();
+        try {
+            Object obj = new JSONParser().parse(getNearbyRes());
+            JSONObject jo = (JSONObject) obj;
+            String results = (String) jo.get("Results");
+            Log.i("MainActivity", results);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return res;
+    }
+
+
 
 
 
