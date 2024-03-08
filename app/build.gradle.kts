@@ -1,7 +1,9 @@
+
 plugins {
     id("com.android.application")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
+
 
 android {
     namespace = "com.msheph1.foodfinder"
@@ -9,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.msheph1.foodfinder"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -35,6 +37,12 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    configurations {
+        all {
+            exclude(group = "com.google.auto.value", module = "auto-value")
+            exclude(group = "junit", module = "junit")
+        }
+    }
 }
 
 dependencies {
@@ -44,10 +52,13 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    annotationProcessor("androidx.room:room-compiler-processing-testing:2.6.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
+
+
 
 secrets {
     // Optionally specify a different file name containing your secrets.

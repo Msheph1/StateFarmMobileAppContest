@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //Log.i("MainActivity",getNearbyRes());
-                parseRes();
+                Log.i("MainActivity",getNearbyRes());
+                //parseRes();
             }
         }).start();
 
@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
         //https://developers.google.com/maps/documentation/places/web-service/search-nearby#json
         try {
             String baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-            String keyword = "cruise";
-            String location = "-33.8670522,151.1957362";
+            String keyword = "";
+            String location = "41.422937, -87.741847";
             int radius = 1500;
             String type = "restaurant";
 
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     URLEncoder.encode(apiKey, "UTF-8"));
 
             URL url = new URL(baseUrl + "?" + urlParameters);
+            //URL url = new URL("");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             //trying buffer method
