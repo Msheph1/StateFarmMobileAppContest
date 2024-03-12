@@ -3,18 +3,14 @@ package com.msheph1.foodfinder;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.libraries.places.api.net.PlacesClient;
 
 
 public class MainActivity extends AppCompatActivity {
 
-
-
-
-    PlacesClient placesClient;
  String apiKey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +28,18 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        
+
         String location = "41.422937, -87.741847";
         Search search = new Search(apiKey);
-        search.getResults(location);
 
-        Log.i("MainActivity", "made it passed get results call");
-        search.printResList();
+
+        Button btn = findViewById(R.id.btn);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                search.getResults(location);
+            }
+        });
 
     }
 }
