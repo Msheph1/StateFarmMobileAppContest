@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        String location = "41.422937, -87.741847";
+
+        double lat = 41.406646;
+        double lng = -87.828035;
         Search search = new Search(apiKey);
 
 
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view){
-                search.getResults(location);
+                search.getResults(lat,lng);
             }
         });
 
