@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         double lat = 41.406646;
         double lng = -87.828035;
-        Search search = new Search(apiKey);
+        ListController lc = new ListController();
+        Search search = new Search(apiKey, lc);
 
 
         Button btn = findViewById(R.id.btn);

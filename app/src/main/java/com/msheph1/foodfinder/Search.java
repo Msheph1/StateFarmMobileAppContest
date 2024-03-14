@@ -16,12 +16,13 @@ import java.util.ArrayList;
 
 public class Search {
     //implementing the api
-    private ArrayList<Resturant> arr = new ArrayList<>();
     private final String apiKey;
+    private ListController lc;
 
-    public Search(String apiKey)
+    public Search(String apiKey, ListController lc)
     {
         this.apiKey = apiKey;
+        this.lc = lc;
     }
 
 
@@ -156,7 +157,6 @@ public class Search {
             e.printStackTrace();
         }
 
-
         return res;
     }
 
@@ -174,7 +174,7 @@ public class Search {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                arr = parseRes(ulat,ulng);
+                lc.setResturants(parseRes(ulat,ulng));
 
             }
         });
@@ -206,9 +206,9 @@ public class Search {
     public void printResList()
     {
 
-        for(int i = 0; i< arr.size(); i++)
+        for(int i = 0; i< lc.getResturants().size(); i++)
         {
-            Log.i("MainActivity", arr.get(i).toString());
+            Log.i("MainActivity", lc.getResturants().get(i).toString());
             return;
         }
         Log.i("MainActivity", "The List is empty");
