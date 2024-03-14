@@ -34,20 +34,21 @@ public class Search {
        @return String a json string
 
         */
-    private String getNearbyRes(double ulat, double ulng)
+    private String getNearbyRes(double ulat, double ulng, int dist, int minp, int maxp, boolean open)
     {
-        //https://developers.google.com/maps/documentation/places/web-service/search-nearby#json
         try {
             String baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
             String keyword = "";
-            int radius = 10000;
             String type = "restaurant";
             String location = ulat + ", " + ulng;
-            String urlParameters = String.format("keyword=%s&location=%s&radius=%d&type=%s&key=%s",
+            String urlParameters = String.format("keyword=%s&location=%s&radius=%d&type=%s&maxprice=%d&minprice=%d&opennow=%b&key=%s",
                     URLEncoder.encode(keyword, "UTF-8"),
                     URLEncoder.encode(location, "UTF-8"),
-                    radius,
+                    dist,
                     URLEncoder.encode(type, "UTF-8"),
+                    maxp,
+                    minp,
+                    open,
                     URLEncoder.encode(apiKey, "UTF-8"));
 
             URL url = new URL(baseUrl + "?" + urlParameters);
@@ -73,10 +74,6 @@ public class Search {
         {
             e.printStackTrace();
         }
-        //parse results get
-        //name , price, ratings, photos, distance
-        //for filters for the api price level cusine type distance ratings open now
-        //for filters we have max price/ min price - open now value type-restuarant/food /maybe takeout filter
         return "err";
     }
 
@@ -91,10 +88,9 @@ public class Search {
 
 
     */
-    private ArrayList<Resturant> parseRes(double ulat, double ulng)
+    private ArrayList<Resturant> parseRes(double ulat, double ulng, String unparsed)
     {
         ArrayList<Resturant> res = new ArrayList<>();
-        String unparsed = getNearbyRes(ulat, ulng);
         Log.i("MainActivity", unparsed);
         try {
             JSONParser parser = new JSONParser();
@@ -140,6 +136,7 @@ public class Search {
                     open = (boolean) openinghours.get("open_now");
                 }
                 boolean permclosed = false;
+                //may want to change this to check for temp close
                 permclosed =  tempobj.containsKey("permanently_closed") ? (boolean) tempobj.get("permanently_closed") : false;
 
 
@@ -156,7 +153,6 @@ public class Search {
         {
             e.printStackTrace();
         }
-
         return res;
     }
 
@@ -169,12 +165,13 @@ public class Search {
 
 
      */
-    public void getResults(double ulat, double ulng)
+    public void getResults(double ulat, double ulng, int dist, int minp, int maxp, boolean open)
     {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                lc.setResturants(parseRes(ulat,ulng));
+                String unparsed = getNearbyRes(ulat, ulng,dist,minp,maxp,open);
+                lc.setResturants(parseRes(ulat,ulng, unparsed));
 
             }
         });

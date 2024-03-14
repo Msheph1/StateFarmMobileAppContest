@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         double lat = 41.406646;
         double lng = -87.828035;
+        double lats = 41.709426;
+        double lngs = -87.758101;
         ListController lc = new ListController();
         Search search = new Search(apiKey, lc);
 
@@ -39,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         Button btn = findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View view){
-                search.getResults(lat,lng);
+                search.getResults(lats,lngs,10000,0,4,false);
             }
         });
 
