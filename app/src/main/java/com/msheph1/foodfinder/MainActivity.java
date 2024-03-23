@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-
         //my house
         double lat = 41.406646;
         double lng = -87.828035;
