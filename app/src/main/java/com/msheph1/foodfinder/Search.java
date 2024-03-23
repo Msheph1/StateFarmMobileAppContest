@@ -97,6 +97,7 @@ public class Search {
             Object obj = parser.parse(unparsed);
             JSONObject json = (JSONObject) obj;
             JSONArray resarr = (JSONArray) json.get("results");
+            int resturantCount = 0;
             for(int i = 0; i< resarr.size(); i++)
             {
                 JSONObject tempobj = (JSONObject) resarr.get(i);
@@ -128,6 +129,7 @@ public class Search {
                 String name = tempobj.containsKey("name") ? (String) tempobj.get("name") : "N/A";
                 long price = tempobj.containsKey("price_level") ? (long) tempobj.get("price_level") : -1;
                 double rating = tempobj.containsKey("rating") ? ((Number) tempobj.get("rating")).doubleValue() : -1;
+                String address = tempobj.containsKey("vicinity") ? (String) tempobj.get("vicinity") : "N/A";
                 //opening_hours/ open_now
                 boolean open = false;
                 JSONObject openinghours = tempobj.containsKey("opening_hours") ? (JSONObject) tempobj.get("opening_hours") : null;
@@ -135,16 +137,16 @@ public class Search {
                 {
                     open = (boolean) openinghours.get("open_now");
                 }
-                boolean permclosed = false;
+                boolean permClosed = false;
                 //may want to change this to check for temp close
-                permclosed =  tempobj.containsKey("permanently_closed") ? (boolean) tempobj.get("permanently_closed") : false;
-
-
-
+                permClosed =  tempobj.containsKey("permanently_closed") ? (boolean) tempobj.get("permanently_closed") : false;
 
                 Log.i("MainActivity", i + "\tName = " + name + "\nPrice = " + price + "\nrating = " + rating + "\nlat = " +
-                        latitude + "\nlng = " + longitude +  "\ndistance = " + distance + "\nopen? = " + open + "\nphoto ref = " + photoref + "\n");
-                res.add(new Resturant(name, price, rating));
+                        latitude + "\nlng = " + longitude +  "\ndistance = " + distance + "\naddress = " + address  + "\nopen? = " + open + "\nphoto ref = " + photoref + "\n");
+                if(!permClosed) {
+                    res.add(new Resturant(name, price, rating, distance, address, open, photoref));
+                    resturantCount++;
+                }
 
 
             }
