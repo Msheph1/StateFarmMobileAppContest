@@ -69,6 +69,7 @@ a {
   background-size: cover;
   width: 70%;
   height: 700px;
+  margin-bottom: 25px;
 }
 
 .content {
@@ -81,7 +82,6 @@ a {
 }
 
 .details {
-  text-align: center;
   width: 50%;
   display: flex;
   flex-wrap: wrap;
@@ -96,9 +96,13 @@ a {
 }
 
 .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
   width: 50%;
   height: 40px;
   text-align: center;
+  margin-top: 25px;
 }
 
 .buttons button {
@@ -107,7 +111,6 @@ a {
   border: none;
   width: 25%;
   height: 100%;
-  margin: 50px;
 }
 .buttons button:hover {
   background-color: rgb(209, 0, 0);
