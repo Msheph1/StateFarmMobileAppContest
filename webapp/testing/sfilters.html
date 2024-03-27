@@ -18,7 +18,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="style2.css" />
+    <link rel="stylesheet" href="filters.css" />
   </head>
   <body>
     <div class="container-fluid">
@@ -29,35 +29,46 @@
           <li>About</li>
         </ul>
       </div>
-      <h2>
-        Please select the filters you would like to search the local resturants
-        by
-      </h2>
-      <form>
-        lati,lngi,distance,minprice,maxprice,open
-        <label for="latitude">Latitude:</label><br />
-        <input type="text" id="lati" name="lati" /><br />
-        <label for="longitude">Longitude:</label><br />
-        <input type="text" id="longi" name="longi" /><br />
-        <label for="distance">Distance (0-50000M):</label><br />
-        <input type="text" id="dist" name="dist" /><br />
-        <label for="minprice">Minimum Price Level:</label><br />
-        <select id="minprice" name="minprice">
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-        <label for="maxprice">Maximum Price Level:</label><br />
-        <select id="maxprice" name="maxprice">
-          <option vlaue="4">4</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-        <label for="open">Currently Open:</label><br />
-        <input type="checkbox" id="open" name="open" /><br />
-      </form>
+      <div class="formcontent">
+        <h2>
+          Please select the filters you would like to search the local
+          resturants by
+        </h2>
+        <form class="formoptions" action="./results.html" method="get">
+          <label for="latitude">Latitude:</label><br />
+          <input type="text" id="lati" name="lati" required /><br />
+          <label for="longitude">Longitude:</label><br />
+          <input type="text" id="longi" name="longi" required /><br />
+          <label for="distance">Distance (0-50000M):</label><br />
+          <input type="text" id="dist" name="dist" required /><br />
+          <div class="minpriceop">
+            <label for="minprice">Minimum Price Level:</label>
+            <select id="minprice" name="minprice">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <div class="maxpriceop">
+            <label for="maxprice">Maximum Price Level:</label>
+            <select id="maxprice" name="maxprice">
+              <option vlaue="4">4</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <div class="openop">
+            <label for="open">Currently Open:</label>
+            <input type="checkbox" id="open" name="open" /><br />
+          </div>
+          <div class="formsub">
+            <input type="submit" />
+            <input type="reset" />
+          </div>
+        </form>
+      </div>
 
       <div class="footer">
         <p>Copyright 2024</p>
