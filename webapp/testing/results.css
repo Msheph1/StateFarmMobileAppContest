@@ -65,51 +65,46 @@ a {
 }
 .photo {
   background-image: url(../photos/mcdonaldsphoto.png);
-  background-postion: center;
+  background-position: center;
   background-size: cover;
-  width: 70%;
-  height: 700px;
-  margin-bottom: 25px;
+  min-width: 400px;
+  min-height: 400px;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background-color: rgb(226, 225, 225);
-  padding: 25px;
-  padding-bottom: 100px;
 }
 
 .details {
-  width: 50%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 50px;
-  justify-content: space-between;
+  padding-top: 50px;
+  padding-bottom: 75px;
 }
 
 .details div {
   font-size: 20px;
   font-weight: 600;
-  width: 300px;
+  width: 400px;
+  padding: 25px;
+}
+
+.para p {
+  display: inline;
 }
 
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 40px;
-  width: 50%;
+  gap: 75px;
   height: 40px;
-  text-align: center;
-  margin-top: 25px;
+  margin-top: 75px;
+  margin-bottom: 75px;
 }
 
 .buttons button {
   background-color: red;
   border-radius: 30px;
   border: none;
-  width: 25%;
+  width: 15%;
   height: 100%;
 }
 .buttons button:hover {
