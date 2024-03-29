@@ -94,6 +94,7 @@ ul {
   background-color: red;
   border: none;
   color: white;
+  min-width: 65px;
 }
 
 .search-btn:hover {
@@ -104,6 +105,8 @@ ul {
   background-image: url(../photos/homescreen2.jpg);
   background-position: center;
   background-size: cover;
+  min-width: 400px;
+  min-height: 400px;
 }
 
 .aboutheading {

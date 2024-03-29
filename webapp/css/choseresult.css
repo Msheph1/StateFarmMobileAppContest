@@ -95,7 +95,7 @@ a {
   display: flex;
   justify-content: center;
   gap: 75px;
-  height: 40px;
+  height: 60px;
   margin-top: 75px;
   margin-bottom: 75px;
 }
@@ -106,7 +106,26 @@ a {
   border: none;
   width: 15%;
   height: 100%;
+  min-width: 130px;
+  min-height: 60px;
 }
 .buttons button:hover {
   background-color: rgb(209, 0, 0);
+}
+
+.solobtnlink button,
+.groupbtnlink button {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  width: 20%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.resulttext {
+  margin-top: 75px;
+  text-align: center;
 }
