@@ -13,7 +13,10 @@ body {
 }
 
 .container-fluid {
+  display: flex;
+  flex-direction: column;
   padding: 0;
+  height: 100%;
 }
 
 .header ul {
