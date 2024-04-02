@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="script.js"></script>
+    <script src="../JS/filters.js" defer></script>
     <title>Food Finder</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link
@@ -39,8 +39,15 @@
           <input type="text" id="lati" name="lati" required /><br />
           <label for="longitude">Longitude:</label><br />
           <input type="text" id="longi" name="longi" required /><br />
+          <button class="locbtn" type="button">Use My Location</button><br />
           <label for="distance">Distance (0-50000M):</label><br />
-          <input type="text" id="dist" name="dist" required /><br />
+          <input
+            type="text"
+            id="dist"
+            name="dist"
+            value="10000"
+            required
+          /><br />
           <div class="minpriceop">
             <label for="minprice">Minimum Price Level:</label>
             <select id="minprice" name="minprice">
