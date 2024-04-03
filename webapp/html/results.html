@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="script.js"></script>
     <title>Food Finder</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link
@@ -18,6 +17,7 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="../JS/result.js" defer></script>
     <link rel="stylesheet" href="../css/results.css" />
   </head>
   <body>
@@ -31,7 +31,7 @@
       </div>
 
       <div class="choices">
-        <div class="row content">
+        <div class="row content" id="1">
           <div class="col-sm col-md-6 details">
             <div class="resname para">
               <p>Resturant Name:</p>
@@ -53,14 +53,20 @@
               <p>Address:</p>
               <p>804 S Main St, Normal,IL 61701</p>
             </div>
+            <div class="open para">
+              <p>Open:</p>
+              <p>Yes</p>
+            </div>
           </div>
-          <div class="col-sm-12 col-md-6 photo"></div>
+          <div class="col-sm-12 col-md-6 photo">
+            <img src="../photos/mcdonaldsphoto.png" />
+          </div>
         </div>
-        <div class="row content">
+        <div class="row content" id="2">
           <div class="col-sm col-md-6 details">
             <div class="resname para">
               <p>Resturant Name:</p>
-              <p>McDonald's</p>
+              <p>Avanti's Italian Resturant</p>
             </div>
             <div class="pricelevel para">
               <p>Price level:</p>
@@ -68,24 +74,30 @@
             </div>
             <div class="rating para">
               <p>Rating:</p>
-              <p>3.5 Stars</p>
+              <p>4.3 Stars</p>
             </div>
             <div class="distance para">
               <p>Distance:</p>
-              <p>2.0 Miles</p>
+              <p>3.0 Miles</p>
             </div>
             <div class="address para">
               <p>Address:</p>
-              <p>804 S Main St, Normal,IL 61701</p>
+              <p>407 S Main St, Normal, IL 61761</p>
+            </div>
+            <div class="open para">
+              <p>Open:</p>
+              <p>Yes</p>
             </div>
           </div>
-          <div class="col-sm-12 col-md-6 photo"></div>
+          <div class="col-sm-12 col-md-6 photo">
+            <img src="../photos/avantis.png" />
+          </div>
         </div>
-        <div class="row content">
+        <div class="row content" id="3">
           <div class="col-sm col-md-6 details">
             <div class="resname para">
               <p>Resturant Name:</p>
-              <p>McDonald's</p>
+              <p>La Bamba</p>
             </div>
             <div class="pricelevel para">
               <p>Price level:</p>
@@ -93,29 +105,35 @@
             </div>
             <div class="rating para">
               <p>Rating:</p>
-              <p>3.5 Stars</p>
+              <p>4.1 Stars</p>
             </div>
             <div class="distance para">
               <p>Distance:</p>
-              <p>2.0 Miles</p>
+              <p>1.0 Miles</p>
             </div>
             <div class="address para">
               <p>Address:</p>
-              <p>804 S Main St, Normal,IL 61701</p>
+              <p>129 E Beaufort St C, Normal, IL 61761</p>
+            </div>
+            <div class="open para">
+              <p>Open:</p>
+              <p>Yes</p>
             </div>
           </div>
-          <div class="col-sm-12 col-md-6 photo"></div>
+          <div class="col-sm-12 col-md-6 photo">
+            <img src="../photos/labamba.png" />
+          </div>
         </div>
       </div>
       <div class="buttons">
+        <button class="dislike">Dislike</button>
+        <button class="like">Like</button>
+      </div>
+      <div>
         <a class="solobtnlink" href="./choseresult.html"
-          ><button class="ldbtn">Dislike</button></a
-        >
-        <a class="groupbtnlink" href="./choseresult.html"
-          ><button class="ldbtn">Like</button></a
+          ><button class="ldbtn">Next Page</button></a
         >
       </div>
-
       <div class="footer">
         <p>Copyright 2024</p>
       </div>

@@ -1,9 +1,6 @@
 function getlocation() {
   console.log("clicked");
   function success(position) {
-    console.log(position);
-    console.log(position.coords.latitude);
-    console.log(position.coords.longitude);
     $("#lati").val(position.coords.latitude);
     $("#longi").val(position.coords.longitude);
   }
