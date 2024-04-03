@@ -30,6 +30,7 @@ const likedResturants = [];
 const disResturants = [];
 
 displayResults();
+localStorage.clear();
 
 function makeResturant() {
   var info = $("#" + index + " p");
@@ -60,3 +61,27 @@ function dislike() {
 
 $(".like").on("click", like);
 $(".dislike").on("click", dislike);
+
+function storeResturants(arr) {
+  console.log("running?");
+  for (let i = 0; i < arr.length; i++) {
+    var str = "";
+    str =
+      arr[i].name +
+      ",,," +
+      arr[i].plevel +
+      ",,," +
+      arr[i].rating +
+      ",,," +
+      arr[i].distance +
+      ",,," +
+      arr[i].address +
+      ",,," +
+      arr[i].open;
+    localStorage.setItem(i, str);
+  }
+}
+
+$(".store").on("click", function () {
+  storeResturants(likedResturants);
+});
