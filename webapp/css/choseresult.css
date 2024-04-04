@@ -63,21 +63,13 @@ a {
   text-decoration: none;
   color: inherit;
 }
-.photo {
-  background-image: url(../photos/mcdonaldsphoto.png);
-  background-position: center;
-  background-size: cover;
-  min-width: 400px;
-  min-height: 400px;
-}
 
 .content {
   background-color: rgb(226, 225, 225);
 }
 
 .details {
-  padding-top: 50px;
-  padding-bottom: 75px;
+  padding: 0px;
 }
 
 .details div {
@@ -128,4 +120,18 @@ a {
 .resulttext {
   margin-top: 75px;
   text-align: center;
+}
+
+.photo {
+  min-width: 400px;
+  min-height: 400px;
+  height: 555px;
+  padding: 0px;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }

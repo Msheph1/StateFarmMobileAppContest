@@ -5,17 +5,14 @@
 //store list of resturants in local storage
 
 class Resturant {
-  constructor(name, plevel, rating, distance, address, open) {
+  constructor(name, plevel, rating, distance, address, open, image) {
     this.name = name;
     this.plevel = plevel;
     this.rating = rating;
     this.distance = distance;
     this.address = address;
     this.open = open;
-  }
-
-  displayResturant() {
-    console.log(`name ${this.name}`);
+    this.image = image;
   }
 }
 
@@ -34,6 +31,7 @@ localStorage.clear();
 
 function makeResturant() {
   var info = $("#" + index + " p");
+  var img = $("#" + index + " img").attr("src");
   var resname = info[1].innerHTML;
   var plevel = info[3].innerHTML;
   var rating = info[5].innerHTML;
@@ -43,7 +41,8 @@ function makeResturant() {
   for (let i = 1; i < info.length; i = i + 2) {
     console.log(info[i].innerHTML);
   }
-  return new Resturant(resname, plevel, rating, distance, address, open);
+  console.log(img);
+  return new Resturant(resname, plevel, rating, distance, address, open, img);
 }
 
 function like() {
@@ -63,10 +62,9 @@ $(".like").on("click", like);
 $(".dislike").on("click", dislike);
 
 function storeResturants(arr) {
-  console.log("running?");
+  var str = "";
   for (let i = 0; i < arr.length; i++) {
-    var str = "";
-    str =
+    str +=
       arr[i].name +
       ",,," +
       arr[i].plevel +
@@ -77,11 +75,14 @@ function storeResturants(arr) {
       ",,," +
       arr[i].address +
       ",,," +
-      arr[i].open;
-    localStorage.setItem(i, str);
+      arr[i].open +
+      ",,," +
+      arr[i].image +
+      "||";
   }
+  localStorage.setItem("liked", str);
 }
 
-$(".store").on("click", function () {
+$(".nextp").on("click", function () {
   storeResturants(likedResturants);
 });
