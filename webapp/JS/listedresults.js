@@ -91,7 +91,7 @@ function createList() {
     $("." + i + " .details").append(
       "<div class=" + "'" + "open para" + "'" + ">"
     );
-    $("." + i + " .open").append("<p>Address:</p>");
+    $("." + i + " .open").append("<p>Open:</p>");
     $("." + i + " .open").append("<p> " + likedResturants[i - 1].open + "</p>");
 
     //photo area
@@ -105,3 +105,57 @@ function createList() {
 }
 
 createList();
+
+function sortByDistance() {
+  for (let i = 0; i < likedResturants.length; i++) {
+    var min = i;
+    for (let j = i + 1; j < likedResturants.length; j++) {
+      if (likedResturants[j].distance < likedResturants[min].distance) {
+        min = j;
+      }
+    }
+    var temp = likedResturants[i];
+    likedResturants[i] = likedResturants[min];
+    likedResturants[min] = temp;
+  }
+  redoList();
+}
+
+function sortByRating() {
+  for (let i = 0; i < likedResturants.length; i++) {
+    var max = i;
+    for (let j = i + 1; j < likedResturants.length; j++) {
+      if (likedResturants[j].rating > likedResturants[max].rating) {
+        max = j;
+      }
+    }
+    var temp = likedResturants[i];
+    likedResturants[i] = likedResturants[max];
+    likedResturants[max] = temp;
+  }
+  redoList();
+}
+
+function sortByPrice() {
+  for (let i = 0; i < likedResturants.length; i++) {
+    var min = i;
+    for (let j = i + 1; j < likedResturants.length; j++) {
+      if (likedResturants[j].plevel < likedResturants[min].plevel) {
+        min = j;
+      }
+    }
+    var temp = likedResturants[i];
+    likedResturants[i] = likedResturants[min];
+    likedResturants[min] = temp;
+  }
+  redoList();
+}
+
+$(".distance").on("click", sortByDistance);
+$(".rating").on("click", sortByRating);
+$(".price").on("click", sortByPrice);
+
+function redoList() {
+  $(".listcont").html("");
+  createList();
+}

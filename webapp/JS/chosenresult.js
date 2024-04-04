@@ -29,13 +29,17 @@ function strToArrRes(str) {
     );
   }
 }
-
+var randomRes = -1;
 strToArrRes(str);
 function randomResturant() {
   return Math.floor(Math.random() * likedResturants.length);
 }
 function selectResturant() {
   var index = randomResturant();
+  while (likedResturants.length > 1 && index == randomRes) {
+    index = randomResturant();
+  }
+  randomRes = index;
   $(".photo img").attr("src", likedResturants[index].image);
   var info = $(".content p");
   info[1].innerHTML = likedResturants[index].name;

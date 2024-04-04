@@ -66,6 +66,7 @@ a {
 .photo {
   min-width: 400px;
   min-height: 400px;
+  padding-bottom: 25px;
 }
 
 .photo img {
