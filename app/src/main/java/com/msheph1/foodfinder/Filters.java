@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 
-public class MainActivity extends AppCompatActivity {
+public class Filters extends AppCompatActivity {
 
  String apiKey;
     @Override
