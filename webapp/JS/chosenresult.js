@@ -1,3 +1,8 @@
+/*
+This JS is for the page where we show the randomly chosen result
+*/
+
+//Have Resturant class for easy access and storage
 class Resturant {
   constructor(name, plevel, rating, distance, address, open, image) {
     this.name = name;
@@ -10,6 +15,7 @@ class Resturant {
   }
 }
 
+//get the array of liked resturants from local storage  and then convert it to an array of resturants
 var str = localStorage.getItem("liked");
 const likedResturants = [];
 function strToArrRes(str) {
@@ -29,11 +35,15 @@ function strToArrRes(str) {
     );
   }
 }
+
+//This is for the first random selection of resturants need this to make sure when we select generate new resturant we get a different and not the same one
 var randomRes = -1;
 strToArrRes(str);
 function randomResturant() {
   return Math.floor(Math.random() * likedResturants.length);
 }
+
+//This function selects a resturant and displays it as the choice
 function selectResturant() {
   var index = randomResturant();
   while (likedResturants.length > 1 && index == randomRes) {

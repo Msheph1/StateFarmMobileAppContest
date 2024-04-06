@@ -1,3 +1,8 @@
+/*
+This is for the list of all liked resturants
+*/
+
+//resturant class for easy access and storage
 class Resturant {
   constructor(name, plevel, rating, distance, address, open, image) {
     this.name = name;
@@ -10,6 +15,7 @@ class Resturant {
   }
 }
 
+//keep all resturants in an array of resturant objects
 var str = localStorage.getItem("liked");
 const likedResturants = [];
 function strToArrRes(str) {
@@ -36,6 +42,7 @@ function strToArrRes(str) {
 
 strToArrRes(str);
 
+//this creates and displays the list for every resturant in the list
 function createList() {
   for (let i = 1; i <= likedResturants.length; i++) {
     $(".listcont").append("<div class=" + "'" + "row content " + i + "'" + ">");
@@ -106,6 +113,7 @@ function createList() {
 
 createList();
 
+//uses selction sort to sort by distance
 function sortByDistance() {
   for (let i = 0; i < likedResturants.length; i++) {
     var min = i;
@@ -121,6 +129,7 @@ function sortByDistance() {
   redoList();
 }
 
+//uses selction sort to sort by rating
 function sortByRating() {
   for (let i = 0; i < likedResturants.length; i++) {
     var max = i;
@@ -136,6 +145,7 @@ function sortByRating() {
   redoList();
 }
 
+//uses selction sort to sort by price
 function sortByPrice() {
   for (let i = 0; i < likedResturants.length; i++) {
     var min = i;
@@ -155,6 +165,7 @@ $(".distance").on("click", sortByDistance);
 $(".rating").on("click", sortByRating);
 $(".price").on("click", sortByPrice);
 
+//delete the entire list in html and replace it with the newely sorted resturant array.
 function redoList() {
   $(".listcont").html("");
   createList();
