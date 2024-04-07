@@ -13,6 +13,15 @@ public class ListController {
         likedList = new ArrayList<>();
     }
 
+    public String getResturantsStr()
+    {
+        String str = "";
+        for(int i = 0; i < resturantArrayList.size(); i++)
+        {
+            str += resturantArrayList.get(i).getInfo() + "//";
+        }
+        return str;
+    }
 
     public void setResturants(ArrayList<Resturant> arr)
     {

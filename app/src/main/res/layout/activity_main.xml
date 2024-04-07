@@ -6,6 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".Filters">
 
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/latitudeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:helperText="Latitude"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/latitudeEditText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:inputType="numberDecimal|numberSigned"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/longitudeContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:helperText="Longitude"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/latitudeContainer">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/longitudeEditText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_marginHorizontal="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lines="1"
+            android:inputType="numberDecimal|numberSigned"
+
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/locbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Use Location"
+        android:backgroundTint="@android:color/red"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/longitudeContainer"
+        app:layout_constraintVertical_bias="0.0" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/distanceContainer"
         android:layout_width="match_parent"
@@ -14,7 +77,7 @@
         app:helperText="Distance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/locbtn">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/distanceEditText"
@@ -74,32 +137,30 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <CheckBox
         android:id="@+id/openCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
+
         android:text="Open Now"
-
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/maxPriceContainer"
-
-        />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/maxPriceContainer" />
 
     <Button
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search"
+        android:backgroundTint="@android:color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.871" />
-
+        app:layout_constraintTop_toBottomOf="@+id/openCheckBox"
+        app:layout_constraintVertical_bias="0.836" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
