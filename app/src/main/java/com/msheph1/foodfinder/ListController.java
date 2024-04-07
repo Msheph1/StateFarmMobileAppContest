@@ -33,6 +33,10 @@ public class ListController {
         return this.resturantArrayList;
     }
 
+    public void setLikedResturants(ArrayList<Resturant> arr){ this.likedList = arr;}
+
+    public ArrayList<Resturant> getLikedResturants(){return this.likedList;}
+
 
 
 

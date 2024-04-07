@@ -116,6 +116,8 @@ public class Search {
                 }
                 //may want to switch to 2(sqrt((dist^2)/2)
                 double distance = calcDistance(ulat, ulng, latitude, longitude) / 1.61;
+                distance = Math.floor(distance * 100) / 100;
+
                 //photos/html_attributions/
                 JSONArray photos = tempobj.containsKey("photos") ? (JSONArray) tempobj.get("photos") : null;
                 String photoref = "";
@@ -137,14 +139,23 @@ public class Search {
                 {
                     open = (boolean) openinghours.get("open_now");
                 }
+                String openstr = open ? "Yes" : "No";
                 boolean permClosed = false;
                 //may want to change this to check for temp close
                 permClosed =  tempobj.containsKey("permanently_closed") ? (boolean) tempobj.get("permanently_closed") : false;
 
                 Log.i("MainActivity", i + "\tName = " + name + "\nPrice = " + price + "\nrating = " + rating + "\nlat = " +
-                        latitude + "\nlng = " + longitude +  "\ndistance = " + distance + "\naddress = " + address  + "\nopen? = " + open + "\nphoto ref = " + photoref + "\n");
+                        latitude + "\nlng = " + longitude +  "\ndistance = " + distance + "\naddress = " + address  + "\nopen? = " + openstr + "\nphoto ref = " + photoref + "\n");
+                String pricestr = "";
+                if(price > 0)
+                {
+                    for(int str = 0; str < price; str++)
+                    {
+                        pricestr += "$";
+                    }
+                }
                 if(!permClosed) {
-                    res.add(new Resturant(name, price, rating, distance, address, open, photoref));
+                    res.add(new Resturant(name, pricestr, rating, distance, address, openstr, photoref));
                     resturantCount++;
                 }
 
@@ -167,7 +178,7 @@ public class Search {
 
 
      */
-    public void getResults(double ulat, double ulng, int dist, int minp, int maxp, boolean open)
+    public void getResults(double ulat, double ulng, int dist, int minp, int maxp, Boolean open)
     {
         Thread thread = new Thread(new Runnable() {
             @Override

@@ -2,7 +2,6 @@ package com.msheph1.foodfinder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -130,8 +129,7 @@ public class Swiping extends AppCompatActivity {
         for(int i = 0; i < resturants.length; i++)
         {
             String[] info = resturants[i].split(",,,");
-            Log.i("Swiping", info.toString());
-            Resturant temp = new Resturant(info[0], Long.parseLong(info[1]),Double.parseDouble(info[2]),Double.parseDouble(info[3]),info[4],Boolean.parseBoolean(info[5]),info[6]);
+            Resturant temp = new Resturant(info[0], info[1],Double.parseDouble(info[2]),Double.parseDouble(info[3]),info[4],info[5],info[6]);
             arr.add(temp);
         }
         lc.setResturants(arr);

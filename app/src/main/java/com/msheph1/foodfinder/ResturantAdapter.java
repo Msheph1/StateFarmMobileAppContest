@@ -30,13 +30,14 @@ public class ResturantAdapter extends ArrayAdapter<Resturant> {
         TextView distance = convertView.findViewById(R.id.distanceText);
         TextView address = convertView.findViewById(R.id.addressText);
         TextView open = convertView.findViewById(R.id.openText);
-
         resName.setText(res.getName());
-        price.setText(String.valueOf(res.getPrice()));
-        rating.setText(String.valueOf(res.getRating()));
-        distance.setText(String.valueOf(res.getDistance()));
+        price.setText(res.getPrice());
+        String ratingStr = res.getRating() + "/5";
+        rating.setText(ratingStr);
+        String distanceStr = res.getDistance() + " Miles";
+        distance.setText(distanceStr);
         address.setText(res.getAddress());
-        open.setText(String.valueOf(res.getOpen()));
+        open.setText(res.getOpen());
 
         return convertView;
     }

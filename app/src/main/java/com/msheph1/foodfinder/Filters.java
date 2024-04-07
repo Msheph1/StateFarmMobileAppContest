@@ -156,10 +156,7 @@ public class Filters extends AppCompatActivity {
                 minprice = Integer.parseInt(minpricetext.getText().toString());
                 maxprice =Integer.parseInt(maxpricetext.getText().toString());
                 open = opencheckbox.isChecked();
-                Log.i("MainActivity","distance set is = : " + distance);
-                Log.i("MainActivity","minprice set is = : " + minprice);
-                Log.i("MainActivity","maxprice set is = : " + maxprice);
-                Log.i("MainActivity","checkbox set is = : " + open);
+
                 search.getResults(lati,lngi,distance,minprice,maxprice,open);
                 Intent i = new Intent(Filters.this, Swiping.class);
                 i.putExtra("res",lc.getResturantsStr(lc.getResturants()));

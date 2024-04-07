@@ -3,14 +3,14 @@ package com.msheph1.foodfinder;
 public class Resturant {
 
     private String name;
-    private long price;
+    private String price;
     private double rating;
     private double distance;
     private String address;
-    private boolean open;
+    private String open;
     private String photo;
 
-    public Resturant(String name, long price, double rating, double distance, String address, boolean open, String photo)
+    public Resturant(String name, String price, double rating, double distance, String address, String open, String photo)
     {
         this.name = name;
         this.price = price;
@@ -23,7 +23,7 @@ public class Resturant {
 
     public String getInfo()
     {
-        return  name +",,," + String.valueOf(price)+ ",,," + String.valueOf(rating) + ",,," + String.valueOf(distance) + ",,," + address + ",,," + String.valueOf(open) + ",,," + photo;
+        return  name +",,," + String.valueOf(price)+ ",,," + String.valueOf(rating) + ",,," + String.valueOf(distance) + ",,," + address + ",,," + open + ",,," + photo;
     }
 
 
@@ -32,7 +32,7 @@ public class Resturant {
         return name;
     }
 
-    public long getPrice()
+    public String getPrice()
     {
         return price;
     }
@@ -52,7 +52,7 @@ public class Resturant {
         return address;
     }
 
-    public boolean getOpen()
+    public String getOpen()
     {
         return open;
     }
