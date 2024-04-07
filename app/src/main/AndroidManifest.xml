@@ -16,7 +16,7 @@
         android:theme="@style/Theme.FoodFinder"
         tools:targetApi="31">
         <activity
-            android:name=".Swiping"
+            android:name=".MainScreen"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
@@ -24,7 +24,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".MainScreen"
+            android:name=".Swiping"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>

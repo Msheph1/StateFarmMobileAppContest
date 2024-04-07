@@ -2,14 +2,23 @@ package com.msheph1.foodfinder;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.lorentzos.flingswipe.SwipeFlingAdapterView;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Swiping extends AppCompatActivity {
 
+    private ArrayAdapter<String> arrayAdapter;
+    List<String> data;
+    SwipeFlingAdapterView flingAdapterView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +32,71 @@ public class Swiping extends AppCompatActivity {
             resStr = extras.getString("res");
         }
         ListController lc = new ListController();
-        strToResturantArr(resStr, lc);
+        //strToResturantArr(resStr, lc);
 
-        TextView test = (TextView) findViewById(R.id.testtext);
-        test.setText(resStr);
+        //TextView test = (TextView) findViewById();
+        //test.setText(resStr);
+        flingAdapterView=findViewById(R.id.swipe);
+
+        data = new ArrayList<>();
+        data.add("avantis");
+        data.add("labamba");
+        data.add("culvers");
+        data.add("medici");
+
+        arrayAdapter = new ArrayAdapter<>(Swiping.this, R.layout.resturantcard, R.id.resNameText, data);
+        flingAdapterView.setAdapter(arrayAdapter);
+        flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
+            @Override
+            public void removeFirstObjectInAdapter() {
+                data.remove(0);
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onLeftCardExit(Object o) {
+                Toast.makeText(Swiping.this, "left", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onRightCardExit(Object o) {
+                Toast.makeText(Swiping.this, "right", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onAdapterAboutToEmpty(int i) {
+
+            }
+
+            @Override
+            public void onScroll(float v) {
+
+            }
+        });
+
+        flingAdapterView.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClicked(int i, Object o) {
+                    Toast.makeText(Swiping.this, "data is " + data.get(i), Toast.LENGTH_SHORT).show();
+                }
+        });
+        Button like = findViewById(R.id.like);
+        Button dislike = findViewById(R.id.dislike);
+
+        like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flingAdapterView.getTopCardListener().selectRight();
+            }
+        });
+        dislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                flingAdapterView.getTopCardListener().selectLeft();
+            }
+        });
     }
 
 

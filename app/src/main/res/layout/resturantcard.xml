@@ -2,13 +2,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="270dp"
-    android:layout_height="150dp"
-    android:layout_gravity="center">
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
 
+    android:background="#DFDFDF"
+    >
 
 
     <TextView
+
         android:id="@+id/resName"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -17,7 +19,7 @@
         android:id="@+id/resNameText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_
-        android:text="Testrresturants:" />
+        android:layout_marginTop="20dp"
+        android:text="Mcdonalds:" />
 
 </FrameLayout>
