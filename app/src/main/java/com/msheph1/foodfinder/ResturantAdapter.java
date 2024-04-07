@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -23,7 +24,19 @@ public class ResturantAdapter extends ArrayAdapter<Resturant> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.resturantcard2, parent, false);
         }
 
-        //grab ids and edit text
+        TextView resName = convertView.findViewById(R.id.resNameText);
+        TextView price = convertView.findViewById(R.id.priceText);
+        TextView rating = convertView.findViewById(R.id.ratingText);
+        TextView distance = convertView.findViewById(R.id.distanceText);
+        TextView address = convertView.findViewById(R.id.addressText);
+        TextView open = convertView.findViewById(R.id.openText);
+
+        resName.setText(res.getName());
+        price.setText(String.valueOf(res.getPrice()));
+        rating.setText(String.valueOf(res.getRating()));
+        distance.setText(String.valueOf(res.getDistance()));
+        address.setText(res.getAddress());
+        open.setText(String.valueOf(res.getOpen()));
 
         return convertView;
     }

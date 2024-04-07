@@ -13,12 +13,12 @@ public class ListController {
         likedList = new ArrayList<>();
     }
 
-    public String getResturantsStr()
+    public String getResturantsStr(ArrayList<Resturant> arr)
     {
         String str = "";
-        for(int i = 0; i < resturantArrayList.size(); i++)
+        for(int i = 0; i < arr.size(); i++)
         {
-            str += resturantArrayList.get(i).getInfo() + "//";
+            str += arr.get(i).getInfo() + "//";
         }
         return str;
     }

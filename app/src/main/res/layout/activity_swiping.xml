@@ -10,10 +10,11 @@
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="28dp">
+        tools:layout_editor_absoluteX="0dp">
 
         <Button
             android:id="@+id/dislike"
@@ -27,9 +28,23 @@
             android:id="@+id/like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="#FF0303"
             android:layout_margin="5dp"
+            android:backgroundTint="#FF0303"
             android:text="LIKE" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/nextpage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="48dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp">
+
+
     </LinearLayout>
 
     <com.lorentzos.flingswipe.SwipeFlingAdapterView
@@ -37,7 +52,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/buttons"
-        app:rotation_degrees="15.0"/>
+        app:rotation_degrees="15.0"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <Button
+        android:id="@+id/nextpagebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:backgroundTint="#FF0303"
+        android:text="Stop Swiping"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttons" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

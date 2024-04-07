@@ -26,11 +26,49 @@ public class Resturant {
         return  name +",,," + String.valueOf(price)+ ",,," + String.valueOf(rating) + ",,," + String.valueOf(distance) + ",,," + address + ",,," + String.valueOf(open) + ",,," + photo;
     }
 
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public long getPrice()
+    {
+        return price;
+    }
+
+    public double getRating()
+    {
+        return rating;
+    }
+
+    public double getDistance()
+    {
+        return distance;
+    }
+
+    public String getAddress()
+    {
+        return address;
+    }
+
+    public boolean getOpen()
+    {
+        return open;
+    }
+
+    public String getPhoto()
+    {
+        return photo;
+    }
+
+
+
+
+
     /*overrides toString method in order to correctly format resturants based on Name Price and Rating
 
     @return String   formatted output for resturant
-
-
 
     */
     @Override

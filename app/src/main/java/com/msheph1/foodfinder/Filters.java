@@ -162,7 +162,7 @@ public class Filters extends AppCompatActivity {
                 Log.i("MainActivity","checkbox set is = : " + open);
                 search.getResults(lati,lngi,distance,minprice,maxprice,open);
                 Intent i = new Intent(Filters.this, Swiping.class);
-                i.putExtra("res",lc.getResturantsStr());
+                i.putExtra("res",lc.getResturantsStr(lc.getResturants()));
                 startActivity(i);
             }
         });
