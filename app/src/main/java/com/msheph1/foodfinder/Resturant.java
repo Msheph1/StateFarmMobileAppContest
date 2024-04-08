@@ -62,15 +62,37 @@ public class Resturant {
         return photo;
     }
 
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
+    public void setOpen(String open) {
+        this.open = open;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+    public void setPrice(String price) {
+        this.price = price;
+    }
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
 
     /*overrides toString method in order to correctly format resturants based on Name Price and Rating
 
-    @return String   formatted output for resturant
+                                @return String   formatted output for resturant
 
-    */
+                                */
     @Override
     public String toString()
     {
