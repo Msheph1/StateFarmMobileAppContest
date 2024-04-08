@@ -1,5 +1,6 @@
 package com.msheph1.foodfinder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,10 +39,6 @@ public class PickedResult extends AppCompatActivity {
             strToLikedResturantArr(resStr, lc);
         }
         ArrayList<Resturant> liked = lc.getLikedResturants();
-        for(int a = 0; a < liked.size(); a++)
-        {
-            Log.i("PICKED", liked.get(a).toString());
-        }
 
         Button genNew = findViewById(R.id.genNewBtn);
         selectResturant(liked);
@@ -49,6 +46,17 @@ public class PickedResult extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 selectResturant(liked);
+            }
+        });
+
+        Button listBtn = findViewById(R.id.viewAllBtn);
+        listBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PickedResult.this, LikedListed.class);
+                i.putExtra("liked",lc.getResturantsStr(liked));
+                startActivity(i);
+
             }
         });
 

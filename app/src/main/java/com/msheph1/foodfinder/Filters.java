@@ -28,7 +28,9 @@ import java.util.Locale;
 
 
 public class Filters extends AppCompatActivity {
-
+    /**
+     * ADD ERROR CHECKING TO THE FILTERS
+     */
  String apiKey;
     FusedLocationProviderClient fusedLocationProviderClient;
     TextInputEditText latitext;
