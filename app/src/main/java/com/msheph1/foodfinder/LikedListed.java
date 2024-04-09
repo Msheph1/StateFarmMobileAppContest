@@ -1,5 +1,6 @@
 package com.msheph1.foodfinder;
 
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class LikedListed extends AppCompatActivity {
 
-
+    Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public class LikedListed extends AppCompatActivity {
         setContentView(R.layout.activity_liked_listed);
 
 
-        Bundle extras = getIntent().getExtras();
+        extras = getIntent().getExtras();
         String resStr = "";
         if(extras != null)
         {
@@ -34,14 +35,10 @@ public class LikedListed extends AppCompatActivity {
             Toast.makeText(LikedListed.this, "No liked resturants found please try again", Toast.LENGTH_LONG).show();
             return;
         } else {
-            Log.i("str", "running");
             strToLikedResturantArr(resStr, lc);
         }
 
         ArrayList<Resturant> liked = lc.getLikedResturants();
-        for(int i = 0; i< liked.size(); i++) {
-            Log.i("LISTele", liked.get(i).toString());
-        }
         redoList(liked);
         Button distBtn = findViewById(R.id.distanceBtn);
         Button priceBtn = findViewById(R.id.priceBtn);
@@ -143,6 +140,13 @@ public class LikedListed extends AppCompatActivity {
             String[] info = resturants[i].split(",,,");
             Resturant temp = new Resturant(info[0], info[1],Double.parseDouble(info[2]),Double.parseDouble(info[3]),info[4],info[5],info[6]);
             arr.add(temp);
+        }
+
+        for(int i = 0; i< arr.size(); i++)
+        {
+            byte[] bytearr = (byte[]) extras.getByteArray("bytearr" + i);
+            arr.get(i).setBytearr(bytearr);
+            arr.get(i).setBitmap(BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length));
         }
         lc.setLikedResturants(arr);
     }

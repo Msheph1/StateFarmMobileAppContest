@@ -1,5 +1,6 @@
 package com.msheph1.foodfinder;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 import org.json.simple.JSONArray;
@@ -7,7 +8,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -18,6 +22,7 @@ public class Search {
     //implementing the api
     private final String apiKey;
     private ListController lc;
+
 
     public Search(String apiKey, ListController lc)
     {
@@ -121,10 +126,36 @@ public class Search {
                 //photos/html_attributions/
                 JSONArray photos = tempobj.containsKey("photos") ? (JSONArray) tempobj.get("photos") : null;
                 String photoref = "";
+                Bitmap bitmap = null;
+                byte[] bytearr = null;
                 if(photos != null)
                 {
                     photoref = ((JSONObject) photos.get(0)).containsKey("photo_reference") ? (String) ((JSONObject) photos.get(0)).get("photo_reference") : null;
+                    String baseurl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=250&maxheight=250&photo_reference=" + photoref + "&key=" + apiKey;
+                    try {
+                        URL url = new URL(baseurl);
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setRequestMethod("GET");
+                        InputStream in = new BufferedInputStream(connection.getInputStream());
+                        ByteArrayOutputStream out = new ByteArrayOutputStream();
+                        byte[] buffer = new byte[1024];
+                        int bytesRead;
+                        while ((bytesRead = in.read(buffer)) != -1) {
+                            out.write(buffer, 0, bytesRead);
+                        }
+                        connection.disconnect();
+                        bytearr = out.toByteArray();
+
+
+                    }
+                    catch(Exception ex)
+                    {
+                        ex.printStackTrace();
+                    }
+
+
                 }
+
                 //name
                 //price_level
                 //rating
@@ -155,7 +186,9 @@ public class Search {
                     }
                 }
                 if(!permClosed) {
-                    res.add(new Resturant(name, pricestr, rating, distance, address, openstr, photoref));
+                    Resturant temp = new Resturant(name, pricestr, rating, distance, address, openstr, photoref);
+                    temp.setBytearr(bytearr);
+                    res.add(temp);
                     resturantCount++;
                 }
 
@@ -185,6 +218,8 @@ public class Search {
             public void run() {
                 String unparsed = getNearbyRes(ulat, ulng,dist,minp,maxp,open);
                 lc.setResturants(parseRes(ulat,ulng, unparsed));
+
+
 
             }
         });

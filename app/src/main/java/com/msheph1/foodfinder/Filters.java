@@ -25,6 +25,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Filters extends AppCompatActivity {
@@ -60,6 +62,7 @@ public class Filters extends AppCompatActivity {
         //isu
         double lati = 40.507574;
         double lngi = -88.985315;
+
         ListController lc = new ListController();
         Search search = new Search(apiKey, lc);
         configureSearchButton(search, lc);
@@ -160,9 +163,34 @@ public class Filters extends AppCompatActivity {
                 open = opencheckbox.isChecked();
 
                 search.getResults(lati,lngi,distance,minprice,maxprice,open);
+                btn.setEnabled(false);
+
+                Timer buttonTimer = new Timer();
+                buttonTimer.schedule(new TimerTask() {
+
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                btn.setEnabled(true);
+                            }
+                        });
+                    }
+                }, 1000);
                 Intent i = new Intent(Filters.this, Swiping.class);
                 i.putExtra("res",lc.getResturantsStr(lc.getResturants()));
+                //bitmaps
+
+                for(int idx = 0; idx < lc.getResturants().size(); idx++)
+                {
+                    i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
+                }
+
+
                 startActivity(i);
+
             }
         });
     }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,13 +24,14 @@ public class ResturantAdapter extends ArrayAdapter<Resturant> {
         {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.resturantcard2, parent, false);
         }
-
+        ImageView img = convertView.findViewById(R.id.imgView);
         TextView resName = convertView.findViewById(R.id.resNameText);
         TextView price = convertView.findViewById(R.id.priceText);
         TextView rating = convertView.findViewById(R.id.ratingText);
         TextView distance = convertView.findViewById(R.id.distanceText);
         TextView address = convertView.findViewById(R.id.addressText);
         TextView open = convertView.findViewById(R.id.openText);
+        img.setImageBitmap(res.getBitmap());
         resName.setText(res.getName());
         price.setText(res.getPrice());
         String ratingStr = res.getRating() + "/5";

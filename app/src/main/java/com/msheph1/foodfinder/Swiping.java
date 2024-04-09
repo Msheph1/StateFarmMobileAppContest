@@ -1,7 +1,9 @@
 package com.msheph1.foodfinder;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,17 +27,20 @@ public class Swiping extends AppCompatActivity {
 
 
      */
+
     private ArrayAdapter<String> arrayAdapter;
     private ResturantAdapter arrAdapter;
     List<Resturant> data;
+    Bundle extras;
     SwipeFlingAdapterView flingAdapterView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swiping);
+        extras = getIntent().getExtras();
 
 
-        Bundle extras = getIntent().getExtras();
         String resStr = "";
         if(extras != null)
         {
@@ -66,9 +71,7 @@ public class Swiping extends AppCompatActivity {
                 arrAdapter.notifyDataSetChanged();
                 if(data.size() == 0)
                 {
-                    Intent i = new Intent(Swiping.this, PickedResult.class);
-                    i.putExtra("liked",lc.getResturantsStr(likedRes));
-                    startActivity(i);
+                    prepNextPage(lc,likedRes);
                 }
             }
 
@@ -102,9 +105,7 @@ public class Swiping extends AppCompatActivity {
         nextpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Swiping.this, PickedResult.class);
-                i.putExtra("liked",lc.getResturantsStr(likedRes));
-                startActivity(i);
+                prepNextPage(lc, likedRes);
             }
         });
         like.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +122,19 @@ public class Swiping extends AppCompatActivity {
         });
     }
 
+    private void prepNextPage(ListController lc, ArrayList<Resturant> likedRes)
+    {
+        Intent i = new Intent(Swiping.this, PickedResult.class);
+        i.putExtra("liked",lc.getResturantsStr(likedRes));
+        for(int idx = 0; idx < likedRes.size(); idx++)
+        {
+            Log.i("PREPPING NEXT PAGE ", "how many i " +idx);
+            i.putExtra("bytearr" + idx, likedRes.get(idx).getBytearr());
+            Log.i("printing if possible", likedRes.get(idx).getBytearr().toString());
+        }
+        startActivity(i);
+    }
+
 
     private void strToResturantArr(String str, ListController lc)
     {
@@ -131,6 +145,13 @@ public class Swiping extends AppCompatActivity {
             String[] info = resturants[i].split(",,,");
             Resturant temp = new Resturant(info[0], info[1],Double.parseDouble(info[2]),Double.parseDouble(info[3]),info[4],info[5],info[6]);
             arr.add(temp);
+        }
+
+        for(int i = 0; i< arr.size(); i++)
+        {
+            byte[] bytearr = (byte[]) extras.getByteArray("bytearr" + i);
+            arr.get(i).setBytearr(bytearr);
+            arr.get(i).setBitmap(BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length));
         }
         lc.setResturants(arr);
     }

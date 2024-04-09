@@ -1,5 +1,7 @@
 package com.msheph1.foodfinder;
 
+import android.graphics.Bitmap;
+
 public class Resturant {
 
     private String name;
@@ -9,6 +11,8 @@ public class Resturant {
     private String address;
     private String open;
     private String photo;
+    private Bitmap bitmap;
+    private byte[] bytearr;
 
     public Resturant(String name, String price, double rating, double distance, String address, String open, String photo)
     {
@@ -62,6 +66,9 @@ public class Resturant {
         return photo;
     }
 
+    public Bitmap getBitmap() {return bitmap;}
+    public byte[] getBytearr() {return bytearr;}
+
     public void setDistance(double distance) {
         this.distance = distance;
     }
@@ -87,6 +94,10 @@ public class Resturant {
     public void setRating(double rating) {
         this.rating = rating;
     }
+
+    public void setBitmap(Bitmap bm) {this.bitmap = bm;}
+
+    public void setBytearr(byte[] ba){this.bytearr = ba;}
 
     /*overrides toString method in order to correctly format resturants based on Name Price and Rating
 
