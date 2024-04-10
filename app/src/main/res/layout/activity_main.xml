@@ -7,25 +7,35 @@
     tools:context=".Filters">
 
 
+    <TextView
+        android:id="@+id/preferencesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="20sp"
+        android:text="Edit Your Preferences"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/latitudeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:helperText="Latitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/preferencesText">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/latitudeEditText"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:lines="1"
+            android:layout_marginHorizontal="20dp"
             android:inputType="numberDecimal|numberSigned"
+            android:lines="1"
             />
 
 
@@ -35,11 +45,11 @@
         android:id="@+id/longitudeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+
         app:helperText="Longitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/latitudeContainer">
+        app:layout_constraintTop_toBottomOf="@+id/latitudeContainer">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/longitudeEditText"
@@ -62,42 +72,65 @@
         android:layout_height="wrap_content"
         android:text="Use Location"
         android:backgroundTint="#FF0303"
-        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/longitudeContainer"
         app:layout_constraintVertical_bias="0.0" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/distanceContainer"
-        android:layout_width="match_parent"
+
+    <TextView
+        android:id="@+id/distanceValue"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:helperText="Distance"
+        android:text="10"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/locbtn" />
+
+    <LinearLayout
+        android:id="@+id/distanceContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/locbtn">
+        app:layout_constraintTop_toBottomOf="@+id/distanceValue">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/distanceEditText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_marginHorizontal="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:lines="1"
-            android:inputType="number"
-            android:text="20000"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"/>
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/slider"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:valueFrom="0"
+            android:valueTo="30"
+            android:value="10"
+            app:thumbColor="#FF0303"
+            app:trackColorActive="#FF0303"
+            app:haloRadius="0dp"
+            app:labelBehavior="gone"
+
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30"/>
+    </LinearLayout>
 
-    </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/minPriceContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:helperText="Mininum Price Rating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -119,8 +152,8 @@
         android:id="@+id/maxPriceContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         app:helperText="Maximum Price Rating"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/minPriceContainer">
@@ -142,7 +175,7 @@
         android:id="@+id/openCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
 
         android:text="Open Now"
         app:layout_constraintEnd_toEndOf="parent"

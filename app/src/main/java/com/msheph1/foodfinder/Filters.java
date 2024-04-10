@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,22 +22,23 @@ import androidx.core.content.ContextCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class Filters extends AppCompatActivity {
     /**
      * ADD ERROR CHECKING TO THE FILTERS
      */
- String apiKey;
+    String apiKey;
     FusedLocationProviderClient fusedLocationProviderClient;
     TextInputEditText latitext;
     TextInputEditText longitext;
+    Slider main_slider;
+    TextView main_sliderVal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +74,15 @@ public class Filters extends AppCompatActivity {
 
 
 
-
+        main_slider = findViewById(R.id.slider);
+        main_sliderVal = findViewById(R.id.distanceValue);
+        main_slider.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
+                double rounded = Math.floor(value * 10)/10;
+                main_sliderVal.setText("Maximum Distance: " + rounded + " Miles");
+            }
+        });
 
 
     }
@@ -143,7 +153,7 @@ public class Filters extends AppCompatActivity {
         Button btn = findViewById(R.id.btn);
         TextInputEditText latitext = (TextInputEditText) findViewById(R.id.latitudeEditText);
         TextInputEditText longitext = (TextInputEditText) findViewById(R.id.longitudeEditText);
-        TextInputEditText distancetext = (TextInputEditText) findViewById(R.id.distanceEditText);
+
         TextInputEditText minpricetext = (TextInputEditText) findViewById(R.id.minPriceEditText);
         TextInputEditText maxpricetext = (TextInputEditText) findViewById(R.id.maxPriceEditText);
         CheckBox opencheckbox = (CheckBox) findViewById(R.id.openCheckBox);
@@ -157,12 +167,14 @@ public class Filters extends AppCompatActivity {
                 boolean open;
                 double lati = Double.parseDouble(latitext.getText().toString());
                 double lngi = Double.parseDouble(longitext.getText().toString());
-                distance = Integer.parseInt(distancetext.getText().toString());
+                //distance = Integer.parseInt(distancetext.getText().toString());
                 minprice = Integer.parseInt(minpricetext.getText().toString());
                 maxprice =Integer.parseInt(maxpricetext.getText().toString());
                 open = opencheckbox.isChecked();
 
-                search.getResults(lati,lngi,distance,minprice,maxprice,open);
+
+                /*
+                add fetching results pop up
                 btn.setEnabled(false);
 
                 Timer buttonTimer = new Timer();
@@ -179,6 +191,10 @@ public class Filters extends AppCompatActivity {
                         });
                     }
                 }, 1000);
+                */
+
+
+                //search.getResults(lati,lngi,distance,minprice,maxprice,open);
                 Intent i = new Intent(Filters.this, Swiping.class);
                 i.putExtra("res",lc.getResturantsStr(lc.getResturants()));
                 //bitmaps
@@ -187,8 +203,6 @@ public class Filters extends AppCompatActivity {
                 {
                     i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
                 }
-
-
                 startActivity(i);
 
             }

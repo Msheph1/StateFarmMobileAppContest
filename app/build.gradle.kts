@@ -59,6 +59,7 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
     implementation("com.lorentzos.swipecards:library:1.0.9")
+
 }
 
 
