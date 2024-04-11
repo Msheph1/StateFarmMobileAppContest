@@ -28,7 +28,6 @@ public class LikedListed extends AppCompatActivity {
         {
 
             resStr = extras.getString("liked");
-            Log.i("str", resStr);
         }
         ListController lc = new ListController();
         if(resStr == null || resStr.equals("")) {
@@ -149,5 +148,9 @@ public class LikedListed extends AppCompatActivity {
             arr.get(i).setBitmap(BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length));
         }
         lc.setLikedResturants(arr);
+        for(int i = 0; i<arr.size(); i++)
+        {
+            Log.i("in liked list", "print the liked res: " + arr.get(i).toString());
+        }
     }
 }

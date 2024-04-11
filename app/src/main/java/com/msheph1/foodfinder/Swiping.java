@@ -69,22 +69,28 @@ public class Swiping extends AppCompatActivity {
             public void removeFirstObjectInAdapter() {
                 data.remove(0);
                 arrAdapter.notifyDataSetChanged();
-                if(data.size() == 0)
-                {
-                    prepNextPage(lc,likedRes);
-                }
+
             }
 
             @Override
             public void onLeftCardExit(Object o) {
-
+                if(data.size() == 0)
+                {
+                    prepNextPage(lc,likedRes);
+                }
 
             }
 
             @Override
             public void onRightCardExit(Object o) {
 
+                Log.i("swiping ", "just liked this res: " + o.toString() );
+
                 likedRes.add((Resturant)o);
+                if(data.size() == 0)
+                {
+                    prepNextPage(lc,likedRes);
+                }
             }
 
             @Override
@@ -124,13 +130,17 @@ public class Swiping extends AppCompatActivity {
 
     private void prepNextPage(ListController lc, ArrayList<Resturant> likedRes)
     {
+        for(int i = 0; i<likedRes.size(); i++)
+        {
+            Log.i("when does this run", "printing all resturants in liked: " + likedRes.get(i).toString() );
+        }
         Intent i = new Intent(Swiping.this, PickedResult.class);
+
         i.putExtra("liked",lc.getResturantsStr(likedRes));
         for(int idx = 0; idx < likedRes.size(); idx++)
         {
-            Log.i("PREPPING NEXT PAGE ", "how many i " +idx);
+
             i.putExtra("bytearr" + idx, likedRes.get(idx).getBytearr());
-            Log.i("printing if possible", likedRes.get(idx).getBytearr().toString());
         }
         startActivity(i);
     }

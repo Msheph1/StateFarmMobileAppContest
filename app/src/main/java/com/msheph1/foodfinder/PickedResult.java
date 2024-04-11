@@ -31,14 +31,14 @@ public class PickedResult extends AppCompatActivity {
         {
 
             resStr = extras.getString("liked");
-            Log.i("str", resStr);
+
         }
         ListController lc = new ListController();
         if(resStr == null || resStr.equals("")) {
             Toast.makeText(PickedResult.this, "No liked resturants found please try again", Toast.LENGTH_LONG).show();
             return;
         } else {
-            Log.i("str", "running");
+
             strToLikedResturantArr(resStr, lc);
         }
         ArrayList<Resturant> liked = lc.getLikedResturants();
@@ -126,5 +126,10 @@ public class PickedResult extends AppCompatActivity {
             arr.get(i).setBitmap(BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length));
         }
         lc.setLikedResturants(arr);
+
+        for(int i = 0; i<arr.size(); i++)
+        {
+            Log.i("in picked result", "print the liked res: " + arr.get(i).toString() );
+        }
     }
 }

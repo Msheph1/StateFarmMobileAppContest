@@ -96,7 +96,6 @@ public class Search {
     private ArrayList<Resturant> parseRes(double ulat, double ulng, String unparsed)
     {
         ArrayList<Resturant> res = new ArrayList<>();
-        Log.i("MainActivity", unparsed);
         try {
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(unparsed);
@@ -175,8 +174,7 @@ public class Search {
                 //may want to change this to check for temp close
                 permClosed =  tempobj.containsKey("permanently_closed") ? (boolean) tempobj.get("permanently_closed") : false;
 
-                Log.i("MainActivity", i + "\tName = " + name + "\nPrice = " + price + "\nrating = " + rating + "\nlat = " +
-                        latitude + "\nlng = " + longitude +  "\ndistance = " + distance + "\naddress = " + address  + "\nopen? = " + openstr + "\nphoto ref = " + photoref + "\n");
+
                 String pricestr = "";
                 if(price > 0)
                 {

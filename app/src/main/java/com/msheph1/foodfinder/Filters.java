@@ -37,8 +37,8 @@ public class Filters extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationProviderClient;
     TextInputEditText latitext;
     TextInputEditText longitext;
-    Slider main_slider;
-    TextView main_sliderVal;
+    Slider mainSlider;
+    TextView mainSliderVal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,14 +56,14 @@ public class Filters extends AppCompatActivity {
         }
 
         //my house
-        double lat = 41.406646;
-        double lng = -87.828035;
-        //sarahs
-        double lats = 41.709426;
-        double lngs = -87.758101;
+        //41.406646;
+        //-87.828035;
+
         //isu
-        double lati = 40.507574;
-        double lngi = -88.985315;
+        //40.507574;
+        //-88.985315;
+        mainSlider = findViewById(R.id.slider);
+        mainSliderVal = findViewById(R.id.distanceValue);
 
         ListController lc = new ListController();
         Search search = new Search(apiKey, lc);
@@ -74,13 +74,12 @@ public class Filters extends AppCompatActivity {
 
 
 
-        main_slider = findViewById(R.id.slider);
-        main_sliderVal = findViewById(R.id.distanceValue);
-        main_slider.addOnChangeListener(new Slider.OnChangeListener() {
+
+        mainSlider.addOnChangeListener(new Slider.OnChangeListener() {
             @Override
             public void onValueChange(@NonNull Slider slider, float value, boolean fromUser) {
                 double rounded = Math.floor(value * 10)/10;
-                main_sliderVal.setText("Maximum Distance: " + rounded + " Miles");
+                mainSliderVal.setText("Maximum Distance: " + rounded + " Miles");
             }
         });
 
@@ -153,7 +152,6 @@ public class Filters extends AppCompatActivity {
         Button btn = findViewById(R.id.btn);
         TextInputEditText latitext = (TextInputEditText) findViewById(R.id.latitudeEditText);
         TextInputEditText longitext = (TextInputEditText) findViewById(R.id.longitudeEditText);
-
         TextInputEditText minpricetext = (TextInputEditText) findViewById(R.id.minPriceEditText);
         TextInputEditText maxpricetext = (TextInputEditText) findViewById(R.id.maxPriceEditText);
         CheckBox opencheckbox = (CheckBox) findViewById(R.id.openCheckBox);
@@ -165,9 +163,10 @@ public class Filters extends AppCompatActivity {
                 int minprice;
                 int maxprice;
                 boolean open;
+                int meters = (int) Math.floor(mainSlider.getValue() * 1.61 * 1000);
                 double lati = Double.parseDouble(latitext.getText().toString());
                 double lngi = Double.parseDouble(longitext.getText().toString());
-                //distance = Integer.parseInt(distancetext.getText().toString());
+                distance = meters;
                 minprice = Integer.parseInt(minpricetext.getText().toString());
                 maxprice =Integer.parseInt(maxpricetext.getText().toString());
                 open = opencheckbox.isChecked();
@@ -194,7 +193,7 @@ public class Filters extends AppCompatActivity {
                 */
 
 
-                //search.getResults(lati,lngi,distance,minprice,maxprice,open);
+                search.getResults(lati,lngi,distance,minprice,maxprice,open);
                 Intent i = new Intent(Filters.this, Swiping.class);
                 i.putExtra("res",lc.getResturantsStr(lc.getResturants()));
                 //bitmaps
