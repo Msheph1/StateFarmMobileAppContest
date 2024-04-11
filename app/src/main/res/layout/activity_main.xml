@@ -11,7 +11,7 @@
         android:id="@+id/preferencesText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="30dp"
         android:textSize="20sp"
         android:text="Edit Your Preferences"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,11 +22,12 @@
         android:id="@+id/latitudeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         app:helperText="Latitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/preferencesText">
+        app:layout_constraintTop_toBottomOf="@+id/preferencesText"
+        app:boxStrokeColor="@color/red">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/latitudeEditText"
@@ -45,11 +46,12 @@
         android:id="@+id/longitudeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="15dp"
         app:helperText="Longitude"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/latitudeContainer">
+        app:layout_constraintTop_toBottomOf="@+id/latitudeContainer"
+        app:boxStrokeColor="@color/red">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/longitudeEditText"
@@ -70,6 +72,7 @@
         android:id="@+id/locbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:text="Use Location"
         android:backgroundTint="#FF0303"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Maximum Distance: 10 Miles"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,86 +105,116 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"/>
+            android:text="0" />
 
         <com.google.android.material.slider.Slider
             android:id="@+id/slider"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
+            android:value="10"
             android:valueFrom="0"
             android:valueTo="30"
-            android:value="10"
-            app:thumbColor="#FF0303"
-            app:trackColorActive="#FF0303"
             app:haloRadius="0dp"
             app:labelBehavior="gone"
+            app:thumbColor="#FF0303"
+            app:trackColorActive="#FF0303"
 
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="30"/>
+            android:text="30" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Minimum Price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/distanceContainer" />
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maximum Price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.724"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/minPriceContainer"
+    <LinearLayout
+        android:id="@+id/pricesCont"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:helperText="Mininum Price Rating"
+        android:layout_marginTop="9dp"
+        android:gravity="center"
+        android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/distanceContainer">
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/minPriceEditText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_marginHorizontal="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:lines="1"
-            android:inputType="number"
-            android:text="0"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:boxStrokeColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.203"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/distanceContainer">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <AutoCompleteTextView
+                android:id="@+id/minPrice"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:text="0" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/maxPriceContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:helperText="Maximum Price Rating"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/minPriceContainer">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/maxPriceEditText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-            android:layout_marginHorizontal="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:lines="1"
-            android:inputType="number"
-            android:text="4"/>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            app:boxStrokeColor="@color/red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.745"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/distanceContainer"
 
-    </com.google.android.material.textfield.TextInputLayout>
+            >
 
+            <AutoCompleteTextView
+                android:id="@+id/maxPrice"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                android:text="4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/openCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-
         android:text="Open Now"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/maxPriceContainer" />
+        app:layout_constraintTop_toBottomOf="@+id/pricesCont"
+        app:buttonTint="@color/red"
+        />
 
     <Button
         android:id="@+id/btn"
@@ -193,7 +226,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/openCheckBox"
-        app:layout_constraintVertical_bias="0.836" />
+        app:layout_constraintVertical_bias="0.836"
+        />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -37,6 +39,7 @@ public class Filters extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationProviderClient;
     TextInputEditText latitext;
     TextInputEditText longitext;
+
     Slider mainSlider;
     TextView mainSliderVal;
     @Override
@@ -84,6 +87,17 @@ public class Filters extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String[] prices = getResources().getStringArray(R.array.prices);
+        ArrayAdapter<String> pricesAdapter = new ArrayAdapter<>(this,R.layout.dropdown_item,prices);
+        AutoCompleteTextView minPriceTextView =  findViewById(R.id.minPrice);
+        AutoCompleteTextView maxPriceTextView =  findViewById(R.id.maxPrice);
+        minPriceTextView.setAdapter(pricesAdapter);
+        maxPriceTextView.setAdapter(pricesAdapter);
     }
 
     private void configureLocButton()
@@ -152,9 +166,10 @@ public class Filters extends AppCompatActivity {
         Button btn = findViewById(R.id.btn);
         TextInputEditText latitext = (TextInputEditText) findViewById(R.id.latitudeEditText);
         TextInputEditText longitext = (TextInputEditText) findViewById(R.id.longitudeEditText);
-        TextInputEditText minpricetext = (TextInputEditText) findViewById(R.id.minPriceEditText);
-        TextInputEditText maxpricetext = (TextInputEditText) findViewById(R.id.maxPriceEditText);
+        AutoCompleteTextView minPriceTextView =  findViewById(R.id.minPrice);
+        AutoCompleteTextView maxPriceTextView =  findViewById(R.id.maxPrice);
         CheckBox opencheckbox = (CheckBox) findViewById(R.id.openCheckBox);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
 
@@ -164,11 +179,32 @@ public class Filters extends AppCompatActivity {
                 int maxprice;
                 boolean open;
                 int meters = (int) Math.floor(mainSlider.getValue() * 1.61 * 1000);
-                double lati = Double.parseDouble(latitext.getText().toString());
-                double lngi = Double.parseDouble(longitext.getText().toString());
+                double lati;
+                if(latitext.getText() == null || latitext.getText().toString().equals(""))
+                {
+                    lati = -1000;
+                }else{
+                    lati = Double.parseDouble(latitext.getText().toString());
+                }
+
+
+                double lngi;
+                if(longitext.getText() == null || longitext.getText().toString().equals(""))
+                {
+                    lngi = -1000;
+                }else{
+                    lngi = Double.parseDouble(longitext.getText().toString());
+                }
+
+                if((lati < -181 || lati > 180) || (lngi < -181 || lngi > 181))
+                {
+                    Toast.makeText(getApplicationContext(), "Invalid Longitude and Latitude Please Try Again", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 distance = meters;
-                minprice = Integer.parseInt(minpricetext.getText().toString());
-                maxprice =Integer.parseInt(maxpricetext.getText().toString());
+
+                minprice = Integer.parseInt(minPriceTextView.getText().toString());
+                maxprice =Integer.parseInt(maxPriceTextView.getText().toString());
                 open = opencheckbox.isChecked();
 
 
@@ -191,19 +227,24 @@ public class Filters extends AppCompatActivity {
                     }
                 }, 1000);
                 */
+                //checking to make sure all filter requirements are set
+
 
 
                 search.getResults(lati,lngi,distance,minprice,maxprice,open);
-                Intent i = new Intent(Filters.this, Swiping.class);
-                i.putExtra("res",lc.getResturantsStr(lc.getResturants()));
-                //bitmaps
+                if(lc.getResturants().size() != 0) {
+                    Intent i = new Intent(Filters.this, Swiping.class);
+                    i.putExtra("res", lc.getResturantsStr(lc.getResturants()));
+                    //bitmaps
 
-                for(int idx = 0; idx < lc.getResturants().size(); idx++)
-                {
-                    i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
+                    for (int idx = 0; idx < lc.getResturants().size(); idx++) {
+                        i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
+                    }
+                    startActivity(i);
                 }
-                startActivity(i);
-
+                else {
+                    Toast.makeText(getApplicationContext(), "0 Results where found with those filters please try again", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
