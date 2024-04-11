@@ -210,13 +210,7 @@ public class Filters extends AppCompatActivity {
 
             public void onClick(View view){
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
 
-                        loadingPopup.startLoadingDialog();
-                    }
-                });
 
 
                 int distance;
@@ -243,12 +237,7 @@ public class Filters extends AppCompatActivity {
 
                 if((lati < -181 || lati > 180) || (lngi < -181 || lngi > 181))
                 {
-                    filtersHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            loadingPopup.dismissDialog();
-                        }
-                    });
+
                     Toast.makeText(getApplicationContext(), "Invalid Longitude and Latitude Please Try Again", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -264,7 +253,13 @@ public class Filters extends AppCompatActivity {
 
 
                 //checking to make sure all filter requirements are set
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
 
+                        loadingPopup.startLoadingDialog();
+                    }
+                });
 
 
 
