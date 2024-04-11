@@ -6,6 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".Swiping">
 
+
+    <Button
+        android:id="@+id/backbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:backgroundTint="@color/red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="2dp"/>
+
+    <Button
+        android:id="@+id/homebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:backgroundTint="@color/red"
+        android:text="Home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
@@ -47,7 +68,8 @@
         app:rotation_degrees="15.0"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="-135dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttons"/>
+        app:layout_constraintBottom_toTopOf="@+id/buttons"
+        />
 
     <Button
         android:id="@+id/nextpagebtn"

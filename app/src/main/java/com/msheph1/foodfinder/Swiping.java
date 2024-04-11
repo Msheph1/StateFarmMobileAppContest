@@ -56,7 +56,7 @@ public class Swiping extends AppCompatActivity {
         else {
             strToResturantArr(resStr, lc);
         }
-
+        configureHomeBackButton();
         flingAdapterView=findViewById(R.id.swipe);
         ArrayList<Resturant> likedRes = new ArrayList<>();
 
@@ -144,7 +144,18 @@ public class Swiping extends AppCompatActivity {
         }
         startActivity(i);
     }
+    private void configureHomeBackButton(){
 
+        Button backbtn = findViewById(R.id.backbtn);
+        Button homebtn = findViewById(R.id.homebtn);
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+    }
 
     private void strToResturantArr(String str, ListController lc)
     {

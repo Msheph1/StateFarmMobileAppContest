@@ -23,7 +23,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:text="Resturant Name:"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgView" />
 
@@ -34,7 +34,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Price:"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -45,7 +45,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Address:"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/distance" />
 
@@ -56,7 +56,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Open now:"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/address" />
 
@@ -67,7 +67,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Distance:"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rating" />
 
@@ -78,7 +78,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="Rating:"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price" />
 
@@ -87,11 +87,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
         android:text="A"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/imgView" />
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
         android:id="@+id/priceText"
@@ -100,7 +99,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="B"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/price"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -111,7 +110,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="C"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/rating"
         app:layout_constraintTop_toBottomOf="@+id/price" />
 
@@ -122,7 +121,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="D"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/distance"
         app:layout_constraintTop_toBottomOf="@+id/rating" />
 
@@ -132,8 +131,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:textSize="13sp"
+        android:maxLines="2"
         android:text="E"
-        android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@+id/address"
         app:layout_constraintTop_toBottomOf="@+id/distance" />
 
@@ -144,7 +144,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="F"
-        android:textSize="16sp"
+        android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/open"
         app:layout_constraintTop_toBottomOf="@+id/address" />
 

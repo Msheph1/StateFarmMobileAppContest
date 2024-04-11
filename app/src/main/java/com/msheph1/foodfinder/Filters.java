@@ -6,6 +6,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,8 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Filters extends AppCompatActivity {
@@ -39,9 +42,10 @@ public class Filters extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationProviderClient;
     TextInputEditText latitext;
     TextInputEditText longitext;
-
+    Handler filtersHandler= new Handler();
     Slider mainSlider;
     TextView mainSliderVal;
+    LoadingPopup loadingPopup = new LoadingPopup(Filters.this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +76,7 @@ public class Filters extends AppCompatActivity {
         Search search = new Search(apiKey, lc);
         configureSearchButton(search, lc);
         configureLocButton();
+        configureHomeBackButton();
 
 
 
@@ -89,6 +94,7 @@ public class Filters extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -98,6 +104,28 @@ public class Filters extends AppCompatActivity {
         AutoCompleteTextView maxPriceTextView =  findViewById(R.id.maxPrice);
         minPriceTextView.setAdapter(pricesAdapter);
         maxPriceTextView.setAdapter(pricesAdapter);
+        filtersHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                loadingPopup.dismissDialog();
+
+            }
+        });
+    }
+
+
+
+    private void configureHomeBackButton(){
+
+        Button backbtn = findViewById(R.id.backbtn);
+        Button homebtn = findViewById(R.id.homebtn);
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
     }
 
     private void configureLocButton()
@@ -163,6 +191,7 @@ public class Filters extends AppCompatActivity {
     }
 
     private void configureSearchButton(Search search, ListController lc){
+
         Button btn = findViewById(R.id.btn);
         TextInputEditText latitext = (TextInputEditText) findViewById(R.id.latitudeEditText);
         TextInputEditText longitext = (TextInputEditText) findViewById(R.id.longitudeEditText);
@@ -174,6 +203,7 @@ public class Filters extends AppCompatActivity {
             @Override
 
             public void onClick(View view){
+                Log.i("clicked", "when clicked");
                 int distance;
                 int minprice;
                 int maxprice;
@@ -201,6 +231,14 @@ public class Filters extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Invalid Longitude and Latitude Please Try Again", Toast.LENGTH_LONG).show();
                     return;
                 }
+                filtersHandler.post(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        Log.i("clicked", "start loading");
+                        loadingPopup.startLoadingDialog();
+                    }
+                });
                 distance = meters;
 
                 minprice = Integer.parseInt(minPriceTextView.getText().toString());
@@ -208,8 +246,8 @@ public class Filters extends AppCompatActivity {
                 open = opencheckbox.isChecked();
 
 
-                /*
-                add fetching results pop up
+
+
                 btn.setEnabled(false);
 
                 Timer buttonTimer = new Timer();
@@ -226,12 +264,19 @@ public class Filters extends AppCompatActivity {
                         });
                     }
                 }, 1000);
-                */
+
                 //checking to make sure all filter requirements are set
 
 
 
+
+
+
+
+
                 search.getResults(lati,lngi,distance,minprice,maxprice,open);
+
+
                 if(lc.getResturants().size() != 0) {
                     Intent i = new Intent(Filters.this, Swiping.class);
                     i.putExtra("res", lc.getResturantsStr(lc.getResturants()));
@@ -241,10 +286,19 @@ public class Filters extends AppCompatActivity {
                         i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
                     }
                     startActivity(i);
+
                 }
                 else {
+                    filtersHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadingPopup.dismissDialog();
+                        }
+                    });
                     Toast.makeText(getApplicationContext(), "0 Results where found with those filters please try again", Toast.LENGTH_LONG).show();
                 }
+
+
             }
         });
     }
