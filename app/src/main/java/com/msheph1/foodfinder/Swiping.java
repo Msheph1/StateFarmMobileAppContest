@@ -3,7 +3,6 @@ package com.msheph1.foodfinder;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -84,7 +83,7 @@ public class Swiping extends AppCompatActivity {
             @Override
             public void onRightCardExit(Object o) {
 
-                Log.i("swiping ", "just liked this res: " + o.toString() );
+
 
                 likedRes.add((Resturant)o);
                 if(data.size() == 0)
@@ -130,10 +129,7 @@ public class Swiping extends AppCompatActivity {
 
     private void prepNextPage(ListController lc, ArrayList<Resturant> likedRes)
     {
-        for(int i = 0; i<likedRes.size(); i++)
-        {
-            Log.i("when does this run", "printing all resturants in liked: " + likedRes.get(i).toString() );
-        }
+
         Intent i = new Intent(Swiping.this, PickedResult.class);
 
         i.putExtra("liked",lc.getResturantsStr(likedRes));
@@ -153,6 +149,14 @@ public class Swiping extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Swiping.this,MainScreen.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
             }
         });
     }

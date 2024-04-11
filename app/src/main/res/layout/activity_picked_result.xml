@@ -6,40 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".PickedResult">
 
+    <Button
+        android:id="@+id/backbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:backgroundTint="@color/red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="2dp"/>
+
+    <Button
+        android:id="@+id/homebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:backgroundTint="@color/red"
+        android:text="Home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="10dp"
         android:text="The Resturant We Choose For You is: "
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/homebtn" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/textView3"
-        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+        android:layout_marginTop="20dp"
         android:background="#E9E9E9"
         android:paddingBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        >
 
 
         <ImageView
             android:id="@+id/imgView"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="350dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="0dp"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/resName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -58,7 +77,7 @@
             android:layout_marginTop="8dp"
             android:text="Price:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/resName" />
 
         <TextView
             android:id="@+id/address"
@@ -111,8 +130,8 @@
             android:layout_marginStart="16dp"
             android:text="A"
             android:textSize="15sp"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintStart_toEndOf="@+id/resName"
+            app:layout_constraintTop_toTopOf="@+id/resName" />
 
         <TextView
             android:id="@+id/priceText"
@@ -123,7 +142,7 @@
             android:layout_marginTop="8dp"
             android:text="B"
             app:layout_constraintStart_toEndOf="@+id/price"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/resName" />
 
         <TextView
             android:id="@+id/ratingText"

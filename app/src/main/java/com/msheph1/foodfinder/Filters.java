@@ -30,8 +30,6 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class Filters extends AppCompatActivity {
@@ -126,6 +124,14 @@ public class Filters extends AppCompatActivity {
                 getOnBackPressedDispatcher().onBackPressed();
             }
         });
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Filters.this,MainScreen.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
     }
 
     private void configureLocButton()
@@ -203,7 +209,16 @@ public class Filters extends AppCompatActivity {
             @Override
 
             public void onClick(View view){
-                Log.i("clicked", "when clicked");
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        loadingPopup.startLoadingDialog();
+                    }
+                });
+
+
                 int distance;
                 int minprice;
                 int maxprice;
@@ -228,17 +243,16 @@ public class Filters extends AppCompatActivity {
 
                 if((lati < -181 || lati > 180) || (lngi < -181 || lngi > 181))
                 {
+                    filtersHandler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadingPopup.dismissDialog();
+                        }
+                    });
                     Toast.makeText(getApplicationContext(), "Invalid Longitude and Latitude Please Try Again", Toast.LENGTH_LONG).show();
                     return;
                 }
-                filtersHandler.post(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        Log.i("clicked", "start loading");
-                        loadingPopup.startLoadingDialog();
-                    }
-                });
                 distance = meters;
 
                 minprice = Integer.parseInt(minPriceTextView.getText().toString());
@@ -248,22 +262,6 @@ public class Filters extends AppCompatActivity {
 
 
 
-                btn.setEnabled(false);
-
-                Timer buttonTimer = new Timer();
-                buttonTimer.schedule(new TimerTask() {
-
-                    @Override
-                    public void run() {
-                        runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                btn.setEnabled(true);
-                            }
-                        });
-                    }
-                }, 1000);
 
                 //checking to make sure all filter requirements are set
 
@@ -273,30 +271,36 @@ public class Filters extends AppCompatActivity {
 
 
 
+                filtersHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        search.getResults(lati,lngi,distance,minprice,maxprice,open);
+                        if(lc.getResturants().size() != 0) {
+                            Intent i = new Intent(Filters.this, Swiping.class);
+                            i.putExtra("res", lc.getResturantsStr(lc.getResturants()));
+                            //bitmaps
 
-                search.getResults(lati,lngi,distance,minprice,maxprice,open);
+                            for (int idx = 0; idx < lc.getResturants().size(); idx++) {
+                                i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
+                            }
+                            startActivity(i);
 
-
-                if(lc.getResturants().size() != 0) {
-                    Intent i = new Intent(Filters.this, Swiping.class);
-                    i.putExtra("res", lc.getResturantsStr(lc.getResturants()));
-                    //bitmaps
-
-                    for (int idx = 0; idx < lc.getResturants().size(); idx++) {
-                        i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
-                    }
-                    startActivity(i);
-
-                }
-                else {
-                    filtersHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            loadingPopup.dismissDialog();
                         }
-                    });
-                    Toast.makeText(getApplicationContext(), "0 Results where found with those filters please try again", Toast.LENGTH_LONG).show();
-                }
+                        else {
+                            filtersHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    loadingPopup.dismissDialog();
+                                }
+                            });
+                            Toast.makeText(getApplicationContext(), "0 Results where found with those filters please try again", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+
+
+
 
 
             }

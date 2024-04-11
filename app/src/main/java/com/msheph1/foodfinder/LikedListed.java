@@ -1,8 +1,8 @@
 package com.msheph1.foodfinder;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -61,8 +61,29 @@ public class LikedListed extends AppCompatActivity {
             }
         });
 
+        configureHomeBackButton();
 
+    }
 
+    private void configureHomeBackButton(){
+
+        Button backbtn = findViewById(R.id.backbtn);
+        Button homebtn = findViewById(R.id.homebtn);
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LikedListed.this,MainScreen.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
     }
 
     private void redoList(ArrayList<Resturant> arr)
@@ -148,9 +169,6 @@ public class LikedListed extends AppCompatActivity {
             arr.get(i).setBitmap(BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length));
         }
         lc.setLikedResturants(arr);
-        for(int i = 0; i<arr.size(); i++)
-        {
-            Log.i("in liked list", "print the liked res: " + arr.get(i).toString());
-        }
+
     }
 }

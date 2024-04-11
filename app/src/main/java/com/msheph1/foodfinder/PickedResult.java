@@ -3,7 +3,6 @@ package com.msheph1.foodfinder;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -36,7 +35,33 @@ public class PickedResult extends AppCompatActivity {
         ListController lc = new ListController();
         if(resStr == null || resStr.equals("")) {
             Toast.makeText(PickedResult.this, "No liked resturants found please try again", Toast.LENGTH_LONG).show();
-            return;
+            TextView resname = findViewById(R.id.resName);
+            TextView price = findViewById(R.id.price);
+            TextView rating = findViewById(R.id.rating);
+            TextView distance = findViewById(R.id.distance);
+            TextView address = findViewById(R.id.address);
+            TextView open = findViewById(R.id.open);
+            TextView resnameText = findViewById(R.id.resNameText);
+            TextView priceText = findViewById(R.id.priceText);
+            TextView ratingText = findViewById(R.id.ratingText);
+            TextView distanceText = findViewById(R.id.distanceText);
+            TextView addressText = findViewById(R.id.addressText);
+            TextView openText = findViewById(R.id.openText);
+            TextView title = findViewById(R.id.textView3);
+            resname.setText("");
+            price.setText("");
+            rating.setText("");
+            distance.setText("");
+            address.setText("");
+            open.setText("");
+            resnameText.setText("");
+            priceText.setText("");
+            ratingText.setText("");
+            distanceText.setText("");
+            addressText.setText("");
+            openText.setText("");
+            title.setText("No Liked Resturants Please Try Again");
+
         } else {
 
             strToLikedResturantArr(resStr, lc);
@@ -44,11 +69,14 @@ public class PickedResult extends AppCompatActivity {
         ArrayList<Resturant> liked = lc.getLikedResturants();
 
         Button genNew = findViewById(R.id.genNewBtn);
-        selectResturant(liked);
+        if(liked.size() > 0)
+            selectResturant(liked);
         genNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectResturant(liked);
+
+                if(liked.size() > 0)
+                    selectResturant(liked);
             }
         });
 
@@ -56,16 +84,20 @@ public class PickedResult extends AppCompatActivity {
         listBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PickedResult.this, LikedListed.class);
-                i.putExtra("liked",lc.getResturantsStr(liked));
-                for(int idx = 0; idx < lc.getLikedResturants().size(); idx++)
-                {
-                    i.putExtra("bytearr" + idx, lc.getLikedResturants().get(idx).getBytearr());
+                if(liked.size() > 0) {
+
+                    Intent i = new Intent(PickedResult.this, LikedListed.class);
+                    i.putExtra("liked", lc.getResturantsStr(liked));
+                    for (int idx = 0; idx < lc.getLikedResturants().size(); idx++) {
+                        i.putExtra("bytearr" + idx, lc.getLikedResturants().get(idx).getBytearr());
+                    }
+                    startActivity(i);
                 }
-                startActivity(i);
 
             }
         });
+
+        configureHomeBackButton();
 
     }
 
@@ -98,7 +130,26 @@ public class PickedResult extends AppCompatActivity {
 
     }
 
+    private void configureHomeBackButton(){
 
+        Button backbtn = findViewById(R.id.backbtn);
+        Button homebtn = findViewById(R.id.homebtn);
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOnBackPressedDispatcher().onBackPressed();
+            }
+        });
+        homebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PickedResult.this,MainScreen.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(i);
+            }
+        });
+    }
 
 
     private int randomResturants(int size){
@@ -127,9 +178,6 @@ public class PickedResult extends AppCompatActivity {
         }
         lc.setLikedResturants(arr);
 
-        for(int i = 0; i<arr.size(); i++)
-        {
-            Log.i("in picked result", "print the liked res: " + arr.get(i).toString() );
-        }
+
     }
 }

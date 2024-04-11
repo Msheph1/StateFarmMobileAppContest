@@ -59,17 +59,25 @@
     </LinearLayout>
 
 
-
-    <com.lorentzos.flingswipe.SwipeFlingAdapterView
-        android:id="@+id/swipe"
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/buttons"
-        app:rotation_degrees="15.0"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-135dp"
-        app:layout_constraintBottom_toTopOf="@+id/buttons"
-        />
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@id/buttons"
+        app:layout_constraintTop_toBottomOf="@id/description">
+
+        <com.lorentzos.flingswipe.SwipeFlingAdapterView
+            android:id="@+id/swipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/buttons"
+            app:layout_constraintBottom_toTopOf="@+id/buttons"
+            app:rotation_degrees="15.0"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-135dp" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/nextpagebtn"
@@ -81,6 +89,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttons" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:text="Choose Your Favorites!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backbtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
