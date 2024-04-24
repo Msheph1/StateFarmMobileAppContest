@@ -1,0 +1,105 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(253, 254, 255);
+}
+
+.container-fluid {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.header ul {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  margin-left: auto;
+  gap: 30px;
+}
+
+.header li {
+  display: inline;
+}
+.header li:hover {
+  cursor: pointer;
+}
+.header {
+  width: 100%;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  line-height: inherit;
+}
+.header h1 {
+  margin: 0;
+  margin-right: auto;
+}
+
+.footer {
+  margin-top: auto;
+  text-align: center;
+  width: 100%;
+}
+
+a {
+  width: 20%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.formcontent {
+  padding: 20px;
+  background-color: rgb(226, 225, 225);
+  text-align: center;
+}
+
+.formsub input:hover {
+  background-color: rgb(148, 0, 0);
+}
+
+.minpriceop select,
+.maxpriceop select {
+  width: 75px;
+}
+
+.formoptions input,
+.minpriceop,
+.maxpriceop,
+.openop {
+  margin: 10px;
+}
+
+.formsub input {
+  background-color: red;
+  border: none;
+  border-radius: 30px;
+  width: 10%;
+  margin: 5px;
+  height: 100%;
+  min-width: 65px;
+}
+
+.formsub {
+  height: 40px;
+}
+
+.locbtn {
+  margin: 10px;
+}
