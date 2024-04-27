@@ -14,7 +14,7 @@ public class Resturant {
     private byte[] bytearr;
     private int id;
 
-    public Resturant(String name, String price, double rating, double distance, String address, String open, String photo, int id)
+    public Resturant(String name, String price, double rating, double distance, String address, String open, String photo)
     {
         this.name = name;
         this.price = price;
@@ -23,7 +23,6 @@ public class Resturant {
         this.address = address;
         this.open = open;
         this.photo = photo;
-        this.id = id;
     }
 
     

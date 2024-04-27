@@ -19,6 +19,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -44,6 +45,11 @@ public class ContactController {
 
 
         ArrayList<Resturant> res = convertToResturantArr(lati, lngi, getResturants(lati, lngi, distance, minPrice, maxPrice, open));
+        Collections.shuffle(res);
+        for(int i = 0; i< res.size(); i++)
+        {
+            res.get(i).setId(i);
+        }
         System.err.println(res.toString());
         model.addAttribute("resturants", res);
 
@@ -110,7 +116,6 @@ public class ContactController {
     {
         String apiKey = BuildConfig.PLACES_API_KEY;
         ArrayList<Resturant> res = new ArrayList<>();
-        int resturantCount = 0;
         try {
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(str);
@@ -197,9 +202,8 @@ public class ContactController {
                     }
                 }
                 if(!permClosed) {
-                    Resturant temp = new Resturant(name, pricestr, rating, distance, address, openstr, encoded, resturantCount);
+                    Resturant temp = new Resturant(name, pricestr, rating, distance, address, openstr, encoded);
                     res.add(temp);
-                    resturantCount++;
                 }
 
 
