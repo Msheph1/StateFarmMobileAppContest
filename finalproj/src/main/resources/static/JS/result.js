@@ -33,12 +33,12 @@ localStorage.clear();
 function makeResturant() {
   var info = $("#" + index + " p");
   var img = $("#" + index + " img").attr("src");
-  var resname = info[1].innerHTML;
-  var plevel = info[3].innerHTML;
-  var rating = info[5].innerHTML;
-  var distance = info[7].innerHTML;
-  var address = info[9].innerHTML;
-  var open = info[11].innerHTML;
+  var resname = info[0].innerHTML;
+  var address = info[1].innerHTML;
+  var plevel = info[2].innerHTML;
+  var rating = info[3].innerHTML;
+  var distance = info[4].innerHTML;
+  var open = info[5].innerHTML;
   for (let i = 1; i < info.length; i = i + 2) {
     console.log(info[i].innerHTML);
   }

@@ -52,12 +52,12 @@ function selectResturant() {
   randomRes = index;
   $(".photo img").attr("src", likedResturants[index].image);
   var info = $(".content p");
-  info[1].innerHTML = likedResturants[index].name;
-  info[3].innerHTML = likedResturants[index].plevel;
-  info[5].innerHTML = likedResturants[index].rating;
-  info[7].innerHTML = likedResturants[index].distance;
-  info[9].innerHTML = likedResturants[index].address;
-  info[11].innerHTML = likedResturants[index].open;
+  info[0].innerHTML = likedResturants[index].name;
+  info[2].innerHTML = likedResturants[index].plevel;
+  info[3].innerHTML = likedResturants[index].rating;
+  info[4].innerHTML = likedResturants[index].distance;
+  info[1].innerHTML = likedResturants[index].address;
+  info[5].innerHTML = likedResturants[index].open;
 }
 
 selectResturant();

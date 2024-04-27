@@ -63,32 +63,28 @@ a {
   text-decoration: none;
   color: inherit;
 }
-.photo {
-  background-image: url(../photos/mcdonaldsphoto.png);
-  background-position: center;
-  background-size: cover;
-  min-width: 400px;
-  min-height: 400px;
-}
 
 .content {
   background-color: rgb(226, 225, 225);
+  position: absolute;
 }
 
 .details {
-  padding-top: 0px;
-  padding-bottom: 75px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.metrics {
+  display: flex;
+  gap: 30px;
 }
 
 .details div {
   font-size: 20px;
   font-weight: 600;
-  width: 400px;
-  padding: 25px;
-}
-
-.para p {
-  display: inline;
 }
 
 .buttons {
@@ -144,15 +140,15 @@ a {
 }
 
 .content {
-  position: absolute;
   width: 100%;
   margin: 0px;
-  height: 555px;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 25px;
 }
 .choices {
   width: 100%;
-  height: 1000px;
-  min-height: 955px;
+  min-height: 800px;
 }
 
 .photo {

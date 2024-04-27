@@ -64,23 +64,22 @@ a {
   color: inherit;
 }
 
-.content {
-  background-color: rgb(226, 225, 225);
+.details {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.details {
-  padding: 0px;
+.metrics {
+  display: flex;
+  gap: 30px;
 }
 
 .details div {
   font-size: 20px;
   font-weight: 600;
-  width: 400px;
-  padding: 25px;
-}
-
-.para p {
-  display: inline;
 }
 
 .buttons {
@@ -120,6 +119,15 @@ a {
 .resulttext {
   margin-top: 75px;
   text-align: center;
+}
+
+.content {
+  background-color: rgb(226, 225, 225);
+  width: 100%;
+  margin: 0px;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 25px;
 }
 
 .photo {

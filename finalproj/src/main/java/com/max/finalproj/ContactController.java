@@ -11,20 +11,18 @@ import jakarta.servlet.http.HttpServletRequest;
 public class ContactController {
 
     
-    @GetMapping({"/contact","/contactform"})
+    @GetMapping({"/index","/"})
     public String showContactForm(){
-        return "redirect:/contact.html";
+        return "redirect:/html/index2.html";
     }
-
 
 
     @PostMapping("/results")
     public String sendContactForm(HttpServletRequest request, Model model) {
         
         
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String message = request.getParameter("message");
+
+
         
         
         return "confirmation";
