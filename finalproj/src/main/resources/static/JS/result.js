@@ -21,7 +21,7 @@ function displayResults() {
 }
 
 //keep track of the like resturants and the disliked one
-var index = 1;
+var index = 0;
 const likedResturants = [];
 const disResturants = [];
 

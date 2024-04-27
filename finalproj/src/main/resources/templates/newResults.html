@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Food Finder</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link
@@ -29,68 +28,30 @@
           <li>About</li>
         </ul>
       </div>
-
+      <h1 style="text-align: center">Choose Your Favorites</h1>
       <div class="choices">
-        <div class="content" id="1">
+        <div
+          class="content"
+          th:each="resturant: ${resturants}"
+          th:id="${resturant.id}"
+        >
           <div class="photo">
-            <img src="../photos/mcdonaldsphoto.png" />
+            <img th:src="@{'data:image/png;base64, ' + ${resturant.photo}}" />
           </div>
           <div class="details">
             <div class="resname para">
-              <p>McDonald's</p>
+              <p th:text="${resturant.name}"></p>
             </div>
             <div class="address para">
-              <p>804 S Main St, Normal,IL 61701</p>
+              <p th:text="${resturant.address}"></p>
             </div>
             <div class="metrics">
-              <p class="pricelevel">$</p>
-              <p class="rating">3.5 Stars</p>
-              <p class="distance">2.0 Miles</p>
+              <p class="pricelevel" th:text="${resturant.price}"></p>
+              <p class="rating" th:text="${resturant.rating}"></p>
+              <p class="distance" th:text="${resturant.distance}"></p>
             </div>
             <div class="open para">
-              <p>Open Now</p>
-            </div>
-          </div>
-        </div>
-        <div class="content" id="2">
-          <div class="photo">
-            <img src="../photos/avantis.png" />
-          </div>
-          <div class="details">
-            <div class="resname para">
-              <p>Avantis</p>
-            </div>
-            <div class="address para">
-              <p>108 S Market St, Normal,IL 61701</p>
-            </div>
-            <div class="metrics">
-              <p class="pricelevel">$$</p>
-              <p class="rating">3.7 Stars</p>
-              <p class="distance">2.2 Miles</p>
-            </div>
-            <div class="open para">
-              <p>Open Now</p>
-            </div>
-          </div>
-        </div>
-        <div class="content" id="3">
-          <div class="photo">
-            <img src="../photos/labamba.png" />
-          </div>
-          <div class="details">
-            <div class="resname para">
-              <p>La Bamba</p>
-            </div>
-            <div class="address para">
-              <p>10 College Ave, Normal,IL 61701</p>
-            </div>
-            <div class="metrics">
-              <p class="pricelevel">$$$</p>
-              <p class="rating">4.8 Stars</p>
-              <p class="distance">0.8 Miles</p>
-            </div>
-            <div class="open para">
-              <p>Open Now</p>
+              <p th:text="${resturant.open}"></p>
             </div>
           </div>
         </div>

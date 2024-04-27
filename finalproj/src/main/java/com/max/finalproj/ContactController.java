@@ -18,6 +18,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Base64;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -31,30 +32,36 @@ public class ContactController {
     }
 
 
-    @PostMapping("/results")
+    @PostMapping("html/results")
     public String sendContactForm(HttpServletRequest request, Model model) {
         //get params
-        Double lati = 0.0;
-        Double lngi = 0.0;
-        int distance= 0;
-        int minPrice = 0;
-        int maxPrice = 0;
-        boolean open = false;
+        Double lati = Double.parseDouble(request.getParameter("lati"));
+        Double lngi = Double.parseDouble(request.getParameter("longi"));
+        int distance= Integer.parseInt(request.getParameter("dist"));
+        int minPrice = Integer.parseInt(request.getParameter("minprice"));
+        int maxPrice = Integer.parseInt(request.getParameter("maxprice"));
+        boolean open = Boolean.parseBoolean(request.getParameter("open"));
 
 
         ArrayList<Resturant> res = convertToResturantArr(lati, lngi, getResturants(lati, lngi, distance, minPrice, maxPrice, open));
+        System.err.println(res.toString());
+        model.addAttribute("resturants", res);
+
 
         
-
-
         
-        
-        return "confirmation";
+        return "newResults";
 
     }
 
     private String getResturants(double lati, double lngi, int distance, int minprice, int maxprice, boolean open)
     {
+        System.out.println(lati);
+        System.out.println(lngi);
+        System.out.println(distance);
+        System.out.println(minprice);
+        System.out.println(maxprice);
+        System.out.println(open);
         String apiKey = BuildConfig.PLACES_API_KEY;
         try {
             String baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
@@ -87,6 +94,7 @@ public class ContactController {
             }
             reader.close();
             connection.disconnect();
+            System.out.println(response.toString());
             return response.toString();
 
         }
@@ -102,6 +110,7 @@ public class ContactController {
     {
         String apiKey = BuildConfig.PLACES_API_KEY;
         ArrayList<Resturant> res = new ArrayList<>();
+        int resturantCount = 0;
         try {
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(str);
@@ -134,7 +143,7 @@ public class ContactController {
                 if(photos != null)
                 {
                     photoref = ((JSONObject) photos.get(0)).containsKey("photo_reference") ? (String) ((JSONObject) photos.get(0)).get("photo_reference") : null;
-                    String baseurl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=250&maxheight=250&photo_reference=" + photoref + "&key=" + apiKey;
+                    String baseurl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=854&maxheight=480&photo_reference=" + photoref + "&key=" + apiKey;
                     try {
                         URL url = new URL(baseurl);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -155,10 +164,10 @@ public class ContactController {
                     {
                         ex.printStackTrace();
                     }
-
+                    
 
                 }
-
+                String encoded = Base64.getEncoder().encodeToString(bytearr);
                 //name
                 //price_level
                 //rating
@@ -188,9 +197,9 @@ public class ContactController {
                     }
                 }
                 if(!permClosed) {
-                    Resturant temp = new Resturant(name, pricestr, rating, distance, address, openstr, photoref);
-                    temp.setBytearr(bytearr);
+                    Resturant temp = new Resturant(name, pricestr, rating, distance, address, openstr, encoded, resturantCount);
                     res.add(temp);
+                    resturantCount++;
                 }
 
 

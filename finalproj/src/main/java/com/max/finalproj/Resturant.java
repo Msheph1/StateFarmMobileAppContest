@@ -12,8 +12,9 @@ public class Resturant {
     private String open;
     private String photo;
     private byte[] bytearr;
+    private int id;
 
-    public Resturant(String name, String price, double rating, double distance, String address, String open, String photo)
+    public Resturant(String name, String price, double rating, double distance, String address, String open, String photo, int id)
     {
         this.name = name;
         this.price = price;
@@ -22,6 +23,7 @@ public class Resturant {
         this.address = address;
         this.open = open;
         this.photo = photo;
+        this.id = id;
     }
 
     
@@ -63,6 +65,9 @@ public class Resturant {
     public byte[] getBytearr() {
         return bytearr;
     }
+    public int getId(){
+        return id;
+    }
     public void setDistance(double distance) {
         this.distance = distance;
     }
@@ -86,6 +91,10 @@ public class Resturant {
     }
     public void setBytearr(byte[] ba){
         this.bytearr = ba;
+    }
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
 }
