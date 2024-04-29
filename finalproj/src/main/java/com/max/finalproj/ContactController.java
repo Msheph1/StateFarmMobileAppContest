@@ -50,7 +50,6 @@ public class ContactController {
         {
             res.get(i).setId(i);
         }
-        System.err.println(res.toString());
         model.addAttribute("resturants", res);
 
 
@@ -62,12 +61,6 @@ public class ContactController {
 
     private String getResturants(double lati, double lngi, int distance, int minprice, int maxprice, boolean open)
     {
-        System.out.println(lati);
-        System.out.println(lngi);
-        System.out.println(distance);
-        System.out.println(minprice);
-        System.out.println(maxprice);
-        System.out.println(open);
         String apiKey = BuildConfig.PLACES_API_KEY;
         try {
             String baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
@@ -100,7 +93,6 @@ public class ContactController {
             }
             reader.close();
             connection.disconnect();
-            System.out.println(response.toString());
             return response.toString();
 
         }

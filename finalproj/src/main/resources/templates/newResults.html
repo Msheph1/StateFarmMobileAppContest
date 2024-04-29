@@ -47,11 +47,11 @@
             </div>
             <div class="metrics">
               <p class="pricelevel" th:text="${resturant.price}"></p>
-              <p class="rating" th:text="${resturant.rating}"></p>
-              <p class="distance" th:text="${resturant.distance}"></p>
+              <p class="rating" th:text="${resturant.rating} + ' / 5.0'"></p>
+              <p class="distance" th:text="${resturant.distance} + ' Miles'"></p>
             </div>
             <div class="open para">
-              <p th:text="${resturant.open}"></p>
+              <p th:text="'Open: ' + ${resturant.open}"></p>
             </div>
           </div>
         </div>
