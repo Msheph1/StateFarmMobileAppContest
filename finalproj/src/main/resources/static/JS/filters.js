@@ -3,7 +3,7 @@ This is for when we select use the computers current location in our form instea
 */
 
 function getlocation() {
-  console.log("clicked");
+  
   function success(position) {
     $("#lati").val(position.coords.latitude);
     $("#longi").val(position.coords.longitude);
@@ -14,4 +14,13 @@ function getlocation() {
   navigator.geolocation.getCurrentPosition(success, error);
 }
 
+function formsub()
+{
+  
+  $(".loading").show();
+}
+
 $(".locbtn").on("click", getlocation);
+$(".subbtn").on("click", formsub);
+
+
