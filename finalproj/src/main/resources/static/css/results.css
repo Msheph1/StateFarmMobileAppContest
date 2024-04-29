@@ -99,15 +99,17 @@ a {
   margin-bottom: 75px;
   margin-left: auto;
   margin-right: auto;
+  min-width: 300px;
 }
 
 .upper,
 .lower {
   min-height: 40px;
+  
 }
 
 .upper button {
-  margin: 30px;
+  margin: 10px;
 }
 
 .lower {

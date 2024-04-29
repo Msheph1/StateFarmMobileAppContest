@@ -52,7 +52,7 @@ function createList() {
     );
     //details
     $("." + i).append(
-      "<div class=" + "'" + "col-sm col-md-6 details" + "'" + ">"
+      "<div class=" + "'" + "col-md col-lg-6 details" + "'" + ">"
     );
     //detail resname
     $("." + i + " .details").append(
@@ -103,7 +103,7 @@ function createList() {
 
     //photo area
     $("." + i).append(
-      "<div class=" + "'" + "col-sm-12 col-md-6 photo" + "'" + ">"
+      "<div class=" + "'" + "col-md-12 col-lg-6 photo" + "'" + ">"
     );
     $("." + i + " .photo").append(
       "<img src=" + "'" + likedResturants[i - 1].image + "'" + ">"
