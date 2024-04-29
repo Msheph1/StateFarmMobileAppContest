@@ -41,9 +41,8 @@ public class ContactController {
         int distance= Integer.parseInt(request.getParameter("dist"));
         int minPrice = Integer.parseInt(request.getParameter("minprice"));
         int maxPrice = Integer.parseInt(request.getParameter("maxprice"));
-        boolean open = Boolean.parseBoolean(request.getParameter("open"));
-
-
+        boolean open = request.getParameter("open").equals("on") ? true : false;
+        
         ArrayList<Resturant> res = convertToResturantArr(lati, lngi, getResturants(lati, lngi, distance, minPrice, maxPrice, open));
         Collections.shuffle(res);
         for(int i = 0; i< res.size(); i++)
