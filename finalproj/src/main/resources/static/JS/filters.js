@@ -11,8 +11,10 @@ function getlocation() {
   function error() {
     alert("Location services need to be turned on for that action");
   }
-  navigator.geolocation.getCurrentPosition(success, error);
+  navigator.geolocation.getCurrentPosition(success, error ,{enableHighAccuracy: true, maximumAge: 10000});
 }
+
+
 
 function formsub()
 {

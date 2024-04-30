@@ -98,7 +98,7 @@ function createList() {
     $("." + i + " .details").append(
       "<div class=" + "'" + "open para" + "'" + ">"
     );
-    $("." + i + " .open").append("<p>Open:</p>");
+
     $("." + i + " .open").append("<p> " + likedResturants[i - 1].open + "</p>");
 
     //photo area

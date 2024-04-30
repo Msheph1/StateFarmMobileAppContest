@@ -5,10 +5,9 @@
 
 html,
 body {
+  min-width: 550px;
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
   background-color: rgb(253, 254, 255);
 }
 
@@ -77,6 +76,8 @@ a {
 }
 
 .content {
+  margin: 0px;
+  width: 100%;
   background-color: rgb(226, 225, 225);
 }
 
@@ -140,10 +141,10 @@ a {
   text-align: center;
 }
 
-.numlabel {
-  margin: 25px;
-}
+
 
 .listcont {
+  background-color: rgb(226, 225, 225);
+  min-height: 100px;
   margin-bottom: 100px;
 }
