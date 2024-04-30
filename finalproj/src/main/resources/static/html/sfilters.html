@@ -34,15 +34,19 @@
           Please select the filters you would like to search the local
           resturants by
         </h2>
-        <form class="formoptions" action="results" method="post" onSubmit="return validate()">
+        <form class="formoptions" action="results" method="post" onsubmit="return validate()">
           <label for="latitude">Latitude:</label><br />
-          <input type="text" id="lati" name="lati" required /><br />
+          <input  type="number" type="number" min="-180" max="180" step=".0000000000000001"
+          id="lati" name="lati" required /><br />
           <label for="longitude">Longitude:</label><br />
-          <input type="text" id="longi" name="longi" required /><br />
+          <input type="number" type="number" min="-180" max="180" step=".0000000000000001"
+           id="longi" name="longi" required /><br />
           <button class="locbtn" type="button">Use My Location</button><br />
           <label for="distance">Distance (0-50000M):</label><br />
           <input
-            type="text"
+            type="number"
+            min="0"
+            max="50000"
             id="dist"
             name="dist"
             value="10000"
