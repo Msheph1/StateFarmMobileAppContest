@@ -35,10 +35,13 @@ public class ContactController {
 
     @PostMapping("html/results")
     public String sendContactForm(HttpServletRequest request, Model model) {
+        System.out.println("FORM SUBMISSION\n\n\n\n");
         //get params
         Double lati = Double.parseDouble(request.getParameter("lati"));
         Double lngi = Double.parseDouble(request.getParameter("longi"));
-        int distance= Integer.parseInt(request.getParameter("dist"));
+
+        Double dist= Double.parseDouble(request.getParameter("dist"));
+        int distance = (int) Math.floor(dist);
         int minPrice = Integer.parseInt(request.getParameter("minprice"));
         int maxPrice = Integer.parseInt(request.getParameter("maxprice"));
         boolean open = false;
