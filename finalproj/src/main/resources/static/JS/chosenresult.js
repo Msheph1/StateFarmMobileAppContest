@@ -59,7 +59,23 @@ function selectResturant() {
   info[1].innerHTML = likedResturants[index].address;
   info[5].innerHTML = likedResturants[index].open;
 }
+if(likedResturants.length > 0)
+{
+  selectResturant();
+}
+else{
+  document.getElementById("imgele").remove();
+  $(".resulttext").text("");
+  var heading = "<h1 style='text-align: center;'>No liked restaurants</h1>"
+  $(".photo").append(heading);
+}
 
-selectResturant();
 
-$(".gennew").on("click", selectResturant);
+function genNew()
+{
+  if(likedResturants.length > 0)
+  {
+  selectResturant();
+  }
+}
+$(".gennew").on("click", genNew);

@@ -35,9 +35,7 @@ function strToArrRes(str) {
         )
       );
     }
-  } else {
-    console.log("nothing in storage");
-  }
+  } 
 }
 
 strToArrRes(str);
@@ -169,4 +167,10 @@ $(".price").on("click", sortByPrice);
 function redoList() {
   $(".listcont").html("");
   createList();
+}
+
+if(likedResturants.length == 0)
+{
+  $(".noRes").text("No Liked Restaurants");
+
 }

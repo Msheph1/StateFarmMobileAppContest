@@ -8,6 +8,8 @@ body {
   min-width: 550px;
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%;
   background-color: rgb(253, 254, 255);
 }
 
@@ -145,6 +147,9 @@ a {
 
 .listcont {
   background-color: rgb(226, 225, 225);
-  min-height: 100px;
   margin-bottom: 100px;
+}
+
+.noRes{
+  margin-top: 50px;
 }
