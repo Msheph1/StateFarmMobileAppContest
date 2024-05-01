@@ -13,18 +13,20 @@ class Resturant {
 }
 
 var noRes = 0;
-
+var totRes = 0;
 //this puts all the divs on different z layers so they are stacked on top of each other
 function displayResults() {
   const elements = document.querySelectorAll(".content");
-  if(elements.length == 0)
-  {
-    $(".headingtext").text("No resturants found with those filters please try again");
+  if (elements.length == 0) {
+    $(".headingtext").text(
+      "No resturants found with those filters please try again"
+    );
     noRes = 1;
   }
   for (let i = 0; i < elements.length; i++) {
     elements[i].style.zIndex = 20 - i;
   }
+  totRes = elements.length;
 }
 
 //keep track of the like resturants and the disliked one
@@ -35,7 +37,6 @@ const disResturants = [];
 //clear local storage incase we want to change answers
 displayResults();
 localStorage.clear();
-
 
 //grabs all the information from the div and creates a resturant object
 function makeResturant() {
@@ -52,32 +53,28 @@ function makeResturant() {
 
 //adds the resturant to the liked list and removes the div from the stack
 function like() {
-  if(noRes== 0)
-  {
-  const res = makeResturant();
-  likedResturants.push(res);
-  $("#" + index).remove();
-  index++;
+  if (noRes == 0 && index < totRes) {
+    const res = makeResturant();
+    likedResturants.push(res);
+    $("#" + index).remove();
+    index++;
   }
-  if(index == 20)
-  {
+  if (index == totRes) {
     storeResturants(likedResturants);
-    window.location.href= "choseresult.html";
+    window.location.href = "choseresult.html";
   }
 }
 //adds the resturant to the disliked list and removes the div from the stack
 function dislike() {
-  if(noRes == 0)
-  {
-  const res = makeResturant();
-  disResturants.push(res);
-  $("#" + index).remove();
-  index++;
+  if (noRes == 0 && index < totRes) {
+    const res = makeResturant();
+    disResturants.push(res);
+    $("#" + index).remove();
+    index++;
   }
-  if(index == 20)
-  {
+  if (index == totRes) {
     storeResturants(likedResturants);
-    window.location.href= "choseresult.html";
+    window.location.href = "choseresult.html";
   }
 }
 
