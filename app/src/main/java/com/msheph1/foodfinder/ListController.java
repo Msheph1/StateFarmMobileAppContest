@@ -7,10 +7,13 @@ public class ListController {
     private ArrayList<Resturant> resturantArrayList;
     private ArrayList<Resturant> likedList;
 
+    private String nextPage;
+
     public ListController()
     {
         resturantArrayList = new ArrayList<>();
         likedList = new ArrayList<>();
+        nextPage = "";
     }
 
     public String getResturantsStr(ArrayList<Resturant> arr)
@@ -36,6 +39,9 @@ public class ListController {
     public void setLikedResturants(ArrayList<Resturant> arr){ this.likedList = arr;}
 
     public ArrayList<Resturant> getLikedResturants(){return this.likedList;}
+
+    public void setNextPage(String str){this.nextPage = str;}
+    public String getNextPage(){return this.nextPage;}
 
 
 

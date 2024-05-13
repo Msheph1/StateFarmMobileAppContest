@@ -27,6 +27,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/moreResults"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
+        android:backgroundTint="#FF0303"
+        android:text="More Results"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backbtn"></Button>
+
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
@@ -64,6 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/buttons"
         app:layout_constraintTop_toBottomOf="@id/description">
 

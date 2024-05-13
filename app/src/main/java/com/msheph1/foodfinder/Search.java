@@ -14,6 +14,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -28,6 +29,19 @@ public class Search {
     {
         this.apiKey = apiKey;
         this.lc = lc;
+    }
+
+    private String getNearbyResNextPage(String nextPage)
+    {
+        try{
+            String baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+            URL url = new URL(baseUrl + "?pagetoken=" + nextPage);
+        }
+        catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return "";
     }
 
 
@@ -100,6 +114,8 @@ public class Search {
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(unparsed);
             JSONObject json = (JSONObject) obj;
+            String nextPage = json.containsKey("next_page_token") ? (String) json.get("next_page_token") : null;
+            lc.setNextPage(nextPage);
             JSONArray resarr = (JSONArray) json.get("results");
             int resturantCount = 0;
             for(int i = 0; i< resarr.size(); i++)
