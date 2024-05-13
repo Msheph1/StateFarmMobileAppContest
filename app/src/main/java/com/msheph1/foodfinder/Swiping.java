@@ -3,6 +3,7 @@ package com.msheph1.foodfinder;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,7 +15,6 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Swiping extends AppCompatActivity {
     /*
@@ -29,12 +29,20 @@ public class Swiping extends AppCompatActivity {
 
     private ArrayAdapter<String> arrayAdapter;
     private ResturantAdapter arrAdapter;
-    List<Resturant> data;
     Bundle extras;
+    double ulati;
+    double ulngi;
+    String nextPageAPI;
+    ArrayList<Resturant> likedRes;
+    Handler swipingHandler= new Handler();
+    ArrayList<Resturant> data;
+
     SwipeFlingAdapterView flingAdapterView;
+    LoadingPopup loadingPopup = new LoadingPopup(Swiping.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swiping);
         extras = getIntent().getExtras();
@@ -57,12 +65,13 @@ public class Swiping extends AppCompatActivity {
         }
         configureHomeBackButton();
         flingAdapterView=findViewById(R.id.swipe);
-        ArrayList<Resturant> likedRes = new ArrayList<>();
+        likedRes = new ArrayList<>();
 
-        ArrayList<Resturant> data = lc.getResturants();
+        data = lc.getResturants();
         Collections.shuffle(data);
         arrAdapter = new ResturantAdapter(Swiping.this, data);
         flingAdapterView.setAdapter(arrAdapter);
+        Button moreRes = findViewById(R.id.moreResults);
         flingAdapterView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
@@ -75,7 +84,8 @@ public class Swiping extends AppCompatActivity {
             public void onLeftCardExit(Object o) {
                 if(data.size() == 0)
                 {
-                    prepNextPage(lc,likedRes);
+                    moreRes.setVisibility(View.VISIBLE);
+                    //prepNextPage(lc,likedRes);
                 }
 
             }
@@ -88,7 +98,8 @@ public class Swiping extends AppCompatActivity {
                 likedRes.add((Resturant)o);
                 if(data.size() == 0)
                 {
-                    prepNextPage(lc,likedRes);
+                    moreRes.setVisibility(View.VISIBLE);
+                    //prepNextPage(lc,likedRes);
                 }
             }
 
@@ -107,6 +118,52 @@ public class Swiping extends AppCompatActivity {
         Button like = findViewById(R.id.like);
         Button dislike = findViewById(R.id.dislike);
 
+        moreRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        loadingPopup.startLoadingDialog();
+                    }
+                });
+
+                swipingHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Search search = new Search(BuildConfig.PLACES_API_KEY,lc);
+                        search.nextPageResults(ulati,ulngi);
+                        if(lc.getResturants().size() != 0) {
+                            moreRes.setVisibility(View.INVISIBLE);
+                            ArrayList<Resturant> newData = lc.getResturants();
+                            moreRes.setVisibility(View.INVISIBLE);
+                            data.addAll(newData);
+                            Collections.shuffle(data);
+                            arrAdapter.notifyDataSetChanged();
+                            swipingHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    loadingPopup.dismissDialog();
+                                }
+                            });
+                        }
+                        else {
+                            swipingHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    loadingPopup.dismissDialog();
+                                }
+                            });
+                            Toast.makeText(getApplicationContext(), "No More Results", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+
+
+            }
+        });
         nextpage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,6 +235,11 @@ public class Swiping extends AppCompatActivity {
             arr.get(i).setBytearr(bytearr);
             arr.get(i).setBitmap(BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length));
         }
+        ulati = extras.getDouble("ulat");
+        ulngi = extras.getDouble("ulng");
+        lc.setNextPage(extras.getString("nextpage"));
+
+
         lc.setResturants(arr);
     }
 }

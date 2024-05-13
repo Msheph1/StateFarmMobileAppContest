@@ -278,6 +278,9 @@ public class Filters extends AppCompatActivity {
                             for (int idx = 0; idx < lc.getResturants().size(); idx++) {
                                 i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
                             }
+                            i.putExtra("ulat", lati);
+                            i.putExtra("ulng", lngi);
+                            i.putExtra("nextpage", lc.getNextPage());
                             startActivity(i);
 
                         }

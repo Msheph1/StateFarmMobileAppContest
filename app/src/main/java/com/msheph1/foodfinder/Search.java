@@ -1,6 +1,7 @@
 package com.msheph1.foodfinder;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import org.json.simple.JSONArray;
@@ -14,7 +15,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -35,13 +35,46 @@ public class Search {
     {
         try{
             String baseUrl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
-            URL url = new URL(baseUrl + "?pagetoken=" + nextPage);
+            URL url = new URL(baseUrl + "?pagetoken=" + nextPage + "&key=" + apiKey);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            int bufferSize = 8192;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            char[] buffer = new char[bufferSize];
+            int bytesRead;
+            while((bytesRead = reader.read(buffer)) != -1)
+            {
+                response.append(buffer, 0, bytesRead);
+            }
+            reader.close();
+            connection.disconnect();
+            return response.toString();
         }
-        catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+        catch (Exception e) {
+            e.printStackTrace();
         }
+        return "err";
+    }
 
-        return "";
+    public void nextPageResults(double ulat, double ulng)
+    {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                String unparsed = getNearbyResNextPage(lc.getNextPage());
+                lc.setResturants(parseRes(ulat,ulng, unparsed));
+            }
+        });
+        thread.start();
+        try {
+            thread.join();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
 
@@ -160,6 +193,7 @@ public class Search {
                         }
                         connection.disconnect();
                         bytearr = out.toByteArray();
+                        bitmap = BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length);
 
 
                     }
@@ -202,6 +236,7 @@ public class Search {
                 if(!permClosed) {
                     Resturant temp = new Resturant(name, pricestr, rating, distance, address, openstr, photoref);
                     temp.setBytearr(bytearr);
+                    temp.setBitmap(bitmap);
                     res.add(temp);
                     resturantCount++;
                 }

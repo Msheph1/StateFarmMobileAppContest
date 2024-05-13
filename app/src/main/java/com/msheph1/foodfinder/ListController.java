@@ -43,6 +43,18 @@ public class ListController {
     public void setNextPage(String str){this.nextPage = str;}
     public String getNextPage(){return this.nextPage;}
 
+    public String toString()
+    {
+        String temp = "";
+        for(int i = 0; i< resturantArrayList.size(); i++ )
+        {
+            temp += resturantArrayList.get(i).toString();
+        }
+        return temp;
+    }
+
+
+
 
 
 
