@@ -48,9 +48,6 @@ public class Filters extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //look into google nearby search advanced
-        // place details
-        //place photos
         apiKey = BuildConfig.PLACES_API_KEY;
 
         if(TextUtils.isEmpty(apiKey) || apiKey.equals("DEFAULT_API_KEY"))
@@ -59,14 +56,6 @@ public class Filters extends AppCompatActivity {
             finish();
             return;
         }
-
-        //my house
-        //41.406646;
-        //-87.828035;
-
-        //isu
-        //40.507574;
-        //-88.985315;
         mainSlider = findViewById(R.id.slider);
         mainSliderVal = findViewById(R.id.distanceValue);
 
@@ -276,18 +265,6 @@ public class Filters extends AppCompatActivity {
                         if(lc.getResturants().size() != 0) {
 
                             Intent i = new Intent(Filters.this, Swiping.class);
-                            /*
-                            i.putExtra("res", lc.getResturantsStr(lc.getResturants()));
-                            //bitmaps
-
-                            for (int idx = 0; idx < lc.getResturants().size(); idx++) {
-                                i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
-                            }
-
-                            i.putExtra("ulat", lati);
-                            i.putExtra("ulng", lngi);
-                            i.putExtra("nextpage", lc.getNextPage());
-                            */
                             startActivity(i);
                             Log.i("make it", "6");
 

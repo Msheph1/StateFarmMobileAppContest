@@ -28,7 +28,6 @@ public class Swiping extends AppCompatActivity {
 
     private ArrayAdapter<String> arrayAdapter;
     private ResturantAdapter arrAdapter;
-    //Bundle extras;
     double ulati;
     double ulngi;
     String nextPageAPI;
@@ -44,27 +43,8 @@ public class Swiping extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swiping);
-        //extras = getIntent().getExtras();
         ListController lc = new ListController();
         lc.setResturants(ResCache.getAllResturants());
-        /*
-        String resStr = "";
-        if(extras != null)
-        {
-
-            resStr = extras.getString("res");
-        }
-
-        if(resStr == null || resStr.equals("")) {
-            Toast.makeText(Swiping.this, "No results found please edit the filters", Toast.LENGTH_LONG).show();
-            //want to alert that no results where found
-            return;
-        }
-        else {
-            strToResturantArr(resStr, lc);
-        }
-        */
-
         configureHomeBackButton();
         flingAdapterView=findViewById(R.id.swipe);
         likedRes = new ArrayList<>();
@@ -193,14 +173,6 @@ public class Swiping extends AppCompatActivity {
     {
 
         Intent i = new Intent(Swiping.this, PickedResult.class);
-        /*
-        i.putExtra("liked",lc.getResturantsStr(likedRes));
-        for(int idx = 0; idx < likedRes.size(); idx++)
-        {
-
-            i.putExtra("bytearr" + idx, likedRes.get(idx).getBytearr());
-        }
-         */
         ResCache.setLikedResturants(likedRes);
         startActivity(i);
     }
@@ -224,32 +196,4 @@ public class Swiping extends AppCompatActivity {
             }
         });
     }
-
-    /*
-    private void strToResturantArr(String str, ListController lc)
-    {
-        String[] resturants = str.split("//");
-        ArrayList<Resturant> arr = new ArrayList<>();
-        for(int i = 0; i < resturants.length; i++)
-        {
-            String[] info = resturants[i].split(",,,");
-            Resturant temp = new Resturant(info[0], info[1],Double.parseDouble(info[2]),Double.parseDouble(info[3]),info[4],info[5],info[6]);
-            arr.add(temp);
-        }
-
-        for(int i = 0; i< arr.size(); i++)
-        {
-            byte[] bytearr = (byte[]) extras.getByteArray("bytearr" + i);
-            arr.get(i).setBytearr(bytearr);
-            arr.get(i).setBitmap(BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length));
-        }
-        ulati = extras.getDouble("ulat");
-        ulngi = extras.getDouble("ulng");
-        lc.setNextPage(extras.getString("nextpage"));
-
-
-        lc.setResturants(arr);
-    }
-
-     */
 }

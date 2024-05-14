@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class LikedListed extends AppCompatActivity {
 
-    //Bundle extras;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,22 +21,7 @@ public class LikedListed extends AppCompatActivity {
         setContentView(R.layout.activity_liked_listed);
         ListController lc = new ListController();
         lc.setLikedResturants(ResCache.getLikedResturants());
-        /*
-        extras = getIntent().getExtras();
-        String resStr = "";
-        if(extras != null)
-        {
 
-            resStr = extras.getString("liked");
-        }
-
-        if(resStr == null || resStr.equals("")) {
-            Toast.makeText(LikedListed.this, "No liked resturants found please try again", Toast.LENGTH_LONG).show();
-            return;
-        } else {
-            strToLikedResturantArr(resStr, lc);
-        }
-         */
         if(lc.getLikedResturants().size() == 0) {
             Toast.makeText(LikedListed.this, "No liked resturants found please try again", Toast.LENGTH_LONG).show();
             return;
@@ -153,28 +138,4 @@ public class LikedListed extends AppCompatActivity {
         redoList(arr);
     }
 
-
-
-    /*
-    private void strToLikedResturantArr(String str, ListController lc)
-    {
-        String[] resturants = str.split("//");
-        ArrayList<Resturant> arr = new ArrayList<>();
-        for(int i = 0; i < resturants.length; i++)
-        {
-            String[] info = resturants[i].split(",,,");
-            Resturant temp = new Resturant(info[0], info[1],Double.parseDouble(info[2]),Double.parseDouble(info[3]),info[4],info[5],info[6]);
-            arr.add(temp);
-        }
-
-        for(int i = 0; i< arr.size(); i++)
-        {
-            byte[] bytearr = (byte[]) extras.getByteArray("bytearr" + i);
-            arr.get(i).setBytearr(bytearr);
-            arr.get(i).setBitmap(BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length));
-        }
-        lc.setLikedResturants(arr);
-
-    }
-     */
 }

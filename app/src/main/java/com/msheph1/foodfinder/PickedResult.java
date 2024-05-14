@@ -16,23 +16,11 @@ public class PickedResult extends AppCompatActivity {
 
 
     int randomRes= -1;
-    Bundle extras;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picked_result);
 
-        /*
-        extras = getIntent().getExtras();
-        String resStr = "";
-        if(extras != null)
-        {
-
-            resStr = extras.getString("liked");
-
-        }
-
-         */
         ListController lc = new ListController();
         lc.setLikedResturants(ResCache.getLikedResturants());
         if(lc.getLikedResturants().size() == 0) {
@@ -89,13 +77,6 @@ public class PickedResult extends AppCompatActivity {
                 if(liked.size() > 0) {
 
                     Intent i = new Intent(PickedResult.this, LikedListed.class);
-                    /*
-                    i.putExtra("liked", lc.getResturantsStr(liked));
-                    for (int idx = 0; idx < lc.getLikedResturants().size(); idx++) {
-                        i.putExtra("bytearr" + idx, lc.getLikedResturants().get(idx).getBytearr());
-                    }
-
-                     */
                     startActivity(i);
                 }
 
@@ -155,35 +136,7 @@ public class PickedResult extends AppCompatActivity {
             }
         });
     }
-
-
     private int randomResturants(int size){
         return (int)Math.floor(Math.random() * size);
     }
-
-
-
-    /*
-    private void strToLikedResturantArr(String str, ListController lc)
-    {
-        String[] resturants = str.split("//");
-        ArrayList<Resturant> arr = new ArrayList<>();
-        for(int i = 0; i < resturants.length; i++)
-        {
-            String[] info = resturants[i].split(",,,");
-            Resturant temp = new Resturant(info[0], info[1],Double.parseDouble(info[2]),Double.parseDouble(info[3]),info[4],info[5],info[6]);
-            arr.add(temp);
-        }
-
-        for(int i = 0; i< arr.size(); i++)
-        {
-            byte[] bytearr = (byte[]) extras.getByteArray("bytearr" + i);
-            arr.get(i).setBytearr(bytearr);
-            arr.get(i).setBitmap(BitmapFactory.decodeByteArray(bytearr, 0, bytearr.length));
-        }
-        lc.setLikedResturants(arr);
-
-
-    }
-     */
 }

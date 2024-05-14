@@ -143,6 +143,7 @@ public class Search {
     */
     private ArrayList<Resturant> parseRes(double ulat, double ulng, String unparsed)
     {
+        Log.i("test", unparsed);
         ArrayList<Resturant> res = new ArrayList<>();
         try {
             JSONParser parser = new JSONParser();
