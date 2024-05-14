@@ -251,7 +251,8 @@ public class Filters extends AppCompatActivity {
 
 
 
-
+                ResCache.setUlati(lati);
+                ResCache.setUlngi(lngi);
                 //checking to make sure all filter requirements are set
                 runOnUiThread(new Runnable() {
                     @Override
@@ -269,19 +270,26 @@ public class Filters extends AppCompatActivity {
                 filtersHandler.post(new Runnable() {
                     @Override
                     public void run() {
+
                         search.getResults(lati,lngi,distance,minprice,maxprice,open);
+
                         if(lc.getResturants().size() != 0) {
+
                             Intent i = new Intent(Filters.this, Swiping.class);
+                            /*
                             i.putExtra("res", lc.getResturantsStr(lc.getResturants()));
                             //bitmaps
 
                             for (int idx = 0; idx < lc.getResturants().size(); idx++) {
                                 i.putExtra("bytearr" + idx, lc.getResturants().get(idx).getBytearr());
                             }
+
                             i.putExtra("ulat", lati);
                             i.putExtra("ulng", lngi);
                             i.putExtra("nextpage", lc.getNextPage());
+                            */
                             startActivity(i);
+                            Log.i("make it", "6");
 
                         }
                         else {

@@ -63,7 +63,8 @@ public class Search {
             @Override
             public void run() {
 
-                String unparsed = getNearbyResNextPage(lc.getNextPage());
+                String unparsed = getNearbyResNextPage(ResCache.getNextPageKey());
+                ResCache.setNextPageKey("");
                 lc.setResturants(parseRes(ulat,ulng, unparsed));
             }
         });
@@ -147,8 +148,8 @@ public class Search {
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(unparsed);
             JSONObject json = (JSONObject) obj;
-            String nextPage = json.containsKey("next_page_token") ? (String) json.get("next_page_token") : null;
-            lc.setNextPage(nextPage);
+            String nextPage = json.containsKey("next_page_token") ? (String) json.get("next_page_token") : "";
+            ResCache.setNextPageKey(nextPage);
             JSONArray resarr = (JSONArray) json.get("results");
             int resturantCount = 0;
             for(int i = 0; i< resarr.size(); i++)
@@ -179,7 +180,7 @@ public class Search {
                 if(photos != null)
                 {
                     photoref = ((JSONObject) photos.get(0)).containsKey("photo_reference") ? (String) ((JSONObject) photos.get(0)).get("photo_reference") : null;
-                    String baseurl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=250&maxheight=250&photo_reference=" + photoref + "&key=" + apiKey;
+                    String baseurl = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&maxheight=480&photo_reference=" + photoref + "&key=" + apiKey;
                     try {
                         URL url = new URL(baseurl);
                         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -267,7 +268,7 @@ public class Search {
             public void run() {
                 String unparsed = getNearbyRes(ulat, ulng,dist,minp,maxp,open);
                 lc.setResturants(parseRes(ulat,ulng, unparsed));
-
+                ResCache.setAllResturants(lc.getResturants());
 
 
             }
@@ -280,6 +281,8 @@ public class Search {
         {
             e.printStackTrace();
         }
+
+
     }
 
 

@@ -1,7 +1,6 @@
 package com.msheph1.foodfinder;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -29,7 +28,7 @@ public class Swiping extends AppCompatActivity {
 
     private ArrayAdapter<String> arrayAdapter;
     private ResturantAdapter arrAdapter;
-    Bundle extras;
+    //Bundle extras;
     double ulati;
     double ulngi;
     String nextPageAPI;
@@ -45,16 +44,17 @@ public class Swiping extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swiping);
-        extras = getIntent().getExtras();
-
-
+        //extras = getIntent().getExtras();
+        ListController lc = new ListController();
+        lc.setResturants(ResCache.getAllResturants());
+        /*
         String resStr = "";
         if(extras != null)
         {
 
             resStr = extras.getString("res");
         }
-        ListController lc = new ListController();
+
         if(resStr == null || resStr.equals("")) {
             Toast.makeText(Swiping.this, "No results found please edit the filters", Toast.LENGTH_LONG).show();
             //want to alert that no results where found
@@ -63,10 +63,11 @@ public class Swiping extends AppCompatActivity {
         else {
             strToResturantArr(resStr, lc);
         }
+        */
+
         configureHomeBackButton();
         flingAdapterView=findViewById(R.id.swipe);
         likedRes = new ArrayList<>();
-
         data = lc.getResturants();
         Collections.shuffle(data);
         arrAdapter = new ResturantAdapter(Swiping.this, data);
@@ -82,10 +83,12 @@ public class Swiping extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object o) {
-                if(data.size() == 0)
+                if(data.size() == 0 && ResCache.getNextPageKey().equals(""))
                 {
+                    prepNextPage(lc, likedRes);
+                }
+                else if(data.size() == 0) {
                     moreRes.setVisibility(View.VISIBLE);
-                    //prepNextPage(lc,likedRes);
                 }
 
             }
@@ -96,10 +99,12 @@ public class Swiping extends AppCompatActivity {
 
 
                 likedRes.add((Resturant)o);
-                if(data.size() == 0)
+                if(data.size() == 0 && ResCache.getNextPageKey().equals(""))
                 {
+                    prepNextPage(lc, likedRes);
+                }
+                else if(data.size() == 0) {
                     moreRes.setVisibility(View.VISIBLE);
-                    //prepNextPage(lc,likedRes);
                 }
             }
 
@@ -132,12 +137,12 @@ public class Swiping extends AppCompatActivity {
                 swipingHandler.post(new Runnable() {
                     @Override
                     public void run() {
+
                         Search search = new Search(BuildConfig.PLACES_API_KEY,lc);
-                        search.nextPageResults(ulati,ulngi);
+                        search.nextPageResults(ResCache.getUlati(),ResCache.getUlngi());
                         if(lc.getResturants().size() != 0) {
                             moreRes.setVisibility(View.INVISIBLE);
                             ArrayList<Resturant> newData = lc.getResturants();
-                            moreRes.setVisibility(View.INVISIBLE);
                             data.addAll(newData);
                             Collections.shuffle(data);
                             arrAdapter.notifyDataSetChanged();
@@ -188,13 +193,15 @@ public class Swiping extends AppCompatActivity {
     {
 
         Intent i = new Intent(Swiping.this, PickedResult.class);
-
+        /*
         i.putExtra("liked",lc.getResturantsStr(likedRes));
         for(int idx = 0; idx < likedRes.size(); idx++)
         {
 
             i.putExtra("bytearr" + idx, likedRes.get(idx).getBytearr());
         }
+         */
+        ResCache.setLikedResturants(likedRes);
         startActivity(i);
     }
     private void configureHomeBackButton(){
@@ -218,6 +225,7 @@ public class Swiping extends AppCompatActivity {
         });
     }
 
+    /*
     private void strToResturantArr(String str, ListController lc)
     {
         String[] resturants = str.split("//");
@@ -242,4 +250,6 @@ public class Swiping extends AppCompatActivity {
 
         lc.setResturants(arr);
     }
+
+     */
 }

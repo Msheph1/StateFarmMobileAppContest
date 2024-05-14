@@ -1,7 +1,6 @@
 package com.msheph1.foodfinder;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,14 +13,15 @@ import java.util.ArrayList;
 
 public class LikedListed extends AppCompatActivity {
 
-    Bundle extras;
+    //Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liked_listed);
-
-
+        ListController lc = new ListController();
+        lc.setLikedResturants(ResCache.getLikedResturants());
+        /*
         extras = getIntent().getExtras();
         String resStr = "";
         if(extras != null)
@@ -29,12 +29,17 @@ public class LikedListed extends AppCompatActivity {
 
             resStr = extras.getString("liked");
         }
-        ListController lc = new ListController();
+
         if(resStr == null || resStr.equals("")) {
             Toast.makeText(LikedListed.this, "No liked resturants found please try again", Toast.LENGTH_LONG).show();
             return;
         } else {
             strToLikedResturantArr(resStr, lc);
+        }
+         */
+        if(lc.getLikedResturants().size() == 0) {
+            Toast.makeText(LikedListed.this, "No liked resturants found please try again", Toast.LENGTH_LONG).show();
+            return;
         }
 
         ArrayList<Resturant> liked = lc.getLikedResturants();
@@ -150,7 +155,7 @@ public class LikedListed extends AppCompatActivity {
 
 
 
-
+    /*
     private void strToLikedResturantArr(String str, ListController lc)
     {
         String[] resturants = str.split("//");
@@ -171,4 +176,5 @@ public class LikedListed extends AppCompatActivity {
         lc.setLikedResturants(arr);
 
     }
+     */
 }

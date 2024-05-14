@@ -1,7 +1,6 @@
 package com.msheph1.foodfinder;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +22,7 @@ public class PickedResult extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picked_result);
 
-
+        /*
         extras = getIntent().getExtras();
         String resStr = "";
         if(extras != null)
@@ -32,8 +31,11 @@ public class PickedResult extends AppCompatActivity {
             resStr = extras.getString("liked");
 
         }
+
+         */
         ListController lc = new ListController();
-        if(resStr == null || resStr.equals("")) {
+        lc.setLikedResturants(ResCache.getLikedResturants());
+        if(lc.getLikedResturants().size() == 0) {
             Toast.makeText(PickedResult.this, "No liked resturants found please try again", Toast.LENGTH_LONG).show();
             TextView resname = findViewById(R.id.resName);
             TextView price = findViewById(R.id.price);
@@ -64,7 +66,7 @@ public class PickedResult extends AppCompatActivity {
 
         } else {
 
-            strToLikedResturantArr(resStr, lc);
+            //strToLikedResturantArr(resStr, lc);
         }
         ArrayList<Resturant> liked = lc.getLikedResturants();
 
@@ -87,10 +89,13 @@ public class PickedResult extends AppCompatActivity {
                 if(liked.size() > 0) {
 
                     Intent i = new Intent(PickedResult.this, LikedListed.class);
+                    /*
                     i.putExtra("liked", lc.getResturantsStr(liked));
                     for (int idx = 0; idx < lc.getLikedResturants().size(); idx++) {
                         i.putExtra("bytearr" + idx, lc.getLikedResturants().get(idx).getBytearr());
                     }
+
+                     */
                     startActivity(i);
                 }
 
@@ -158,7 +163,7 @@ public class PickedResult extends AppCompatActivity {
 
 
 
-
+    /*
     private void strToLikedResturantArr(String str, ListController lc)
     {
         String[] resturants = str.split("//");
@@ -180,4 +185,5 @@ public class PickedResult extends AppCompatActivity {
 
 
     }
+     */
 }
